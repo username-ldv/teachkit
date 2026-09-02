@@ -1,0 +1,35 @@
+{
+  "name": "teach-course",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A teaching workspace course — lessons as a prerendered SvelteKit app",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev --port 8321",
+    "build": "vite build",
+    "preview": "vite preview --port 8321",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "check:pages": "node tools/check-pages.mjs",
+    "fix:tex": "node tools/fix-tex.mjs"
+  },
+  "devDependencies": {
+    "@internationalized/date": "3.12.4",
+    "@lucide/svelte": "1.39.0",
+    "@sveltejs/adapter-static": "3.0.10",
+    "@sveltejs/kit": "2.70.3",
+    "@sveltejs/vite-plugin-svelte": "7.3.0",
+    "@tailwindcss/vite": "4.3.3",
+    "bits-ui": "2.19.0",
+    "clsx": "2.1.1",
+    "katex": "0.18.5",
+    "shiki": "4.4.3",
+    "svelte": "5.57.0",
+    "svelte-check": "4.7.6",
+    "tailwind-merge": "3.6.0",
+    "tailwind-variants": "3.3.1",
+    "tailwindcss": "4.3.3",
+    "typescript": "6.0.3",
+    "vite": "8.2.2"
+  }
+}

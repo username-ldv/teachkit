@@ -1,0 +1,254 @@
+/* ============================================================
+   Shared visual language for the SVG diagram library
+   (src/lib/diagrams/*.svelte).
+
+   Every diagram is real SVG, sized in a viewBox and scaled to the
+   column width. Colour is never hard-coded in a component: each
+   component paints with these variables so the whole course stays
+   on one palette and the print stylesheet can recolour everything
+   in one place.
+   ============================================================ */
+
+.figure {
+  margin: 1.6rem 0;
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 1rem 1.1rem 0.9rem;
+}
+
+.figure svg.dg {
+  display: block;
+  height: auto;
+  /* The svg carries width/height attributes equal to its viewBox, so it
+     renders 1:1 when the column has room and scales down when it does not —
+     never up. That keeps label sizes identical from one figure to the next. */
+  max-width: 100%;
+  overflow: visible;
+}
+
+.figure.plain {
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+.figure-title {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+.figure-caption {
+  margin: 0.75rem 0 0;
+  font-size: 0.87rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.figure-caption code {
+  font-size: 0.82em;
+}
+
+/* Diagrams that outgrow the column scroll rather than squashing. */
+.figure-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.figure-scroll > svg.dg {
+  min-width: var(--fig-min, 34rem);
+  max-width: none;
+}
+
+/* ---------- interactive controls under a diagram ---------- */
+
+.figure-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+  padding-top: 0.8rem;
+  border-top: 1px dashed var(--border-soft);
+}
+
+.figure-controls .spacer {
+  flex: 1;
+}
+
+.figure-controls .readout {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.figure-controls .readout b {
+  color: var(--cyan);
+  font-weight: 600;
+}
+
+/* ---------- SVG primitives ---------- */
+
+.dg {
+  font-family: var(--sans);
+}
+
+.dg text {
+  fill: var(--text);
+  font-size: 13px;
+}
+
+.dg .mono {
+  font-family: var(--mono);
+}
+
+.dg .box {
+  fill: var(--surface-2);
+  stroke: var(--border);
+  stroke-width: 1.25;
+}
+
+.dg .box.empty {
+  fill: transparent;
+  stroke-dasharray: 3 3;
+  stroke: var(--border-soft);
+}
+
+.dg .box.accent {
+  stroke: var(--accent);
+  fill: color-mix(in srgb, var(--accent) 14%, var(--surface-2));
+}
+.dg .box.green {
+  stroke: var(--green);
+  fill: color-mix(in srgb, var(--green) 14%, var(--surface-2));
+}
+.dg .box.yellow {
+  stroke: var(--yellow);
+  fill: color-mix(in srgb, var(--yellow) 14%, var(--surface-2));
+}
+.dg .box.red {
+  stroke: var(--red);
+  fill: color-mix(in srgb, var(--red) 14%, var(--surface-2));
+}
+.dg .box.purple {
+  stroke: var(--purple);
+  fill: color-mix(in srgb, var(--purple) 14%, var(--surface-2));
+}
+.dg .box.cyan {
+  stroke: var(--cyan);
+  fill: color-mix(in srgb, var(--cyan) 14%, var(--surface-2));
+}
+.dg .box.ghost {
+  opacity: 0.35;
+}
+
+.dg .val {
+  fill: var(--bright);
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.dg .label {
+  fill: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.dg .label.strong {
+  fill: var(--text);
+}
+
+.dg .note {
+  fill: var(--muted);
+  font-size: 12px;
+}
+
+.dg .accent-t {
+  fill: var(--accent);
+}
+.dg .green-t {
+  fill: var(--green);
+}
+.dg .yellow-t {
+  fill: var(--yellow);
+}
+.dg .red-t {
+  fill: var(--red);
+}
+.dg .purple-t {
+  fill: var(--purple);
+}
+.dg .cyan-t {
+  fill: var(--cyan);
+}
+
+.dg .arrow {
+  stroke: var(--muted);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.dg .arrow.accent {
+  stroke: var(--accent);
+}
+.dg .arrow.green {
+  stroke: var(--green);
+}
+.dg .arrow.red {
+  stroke: var(--red);
+}
+.dg .arrow.purple {
+  stroke: var(--purple);
+}
+.dg .arrow.cyan {
+  stroke: var(--cyan);
+}
+.dg .arrow.yellow {
+  stroke: var(--yellow);
+}
+.dg .arrow.dashed {
+  stroke-dasharray: 4 3;
+}
+.dg .arrow.faint {
+  stroke: var(--border);
+}
+
+.dg .rule {
+  stroke: var(--border-soft);
+  stroke-width: 1;
+}
+
+.dg .axis {
+  stroke: var(--muted);
+  stroke-width: 1.25;
+  fill: none;
+}
+
+.dg .curve {
+  fill: none;
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Smooth the value swaps in the steppable diagrams. */
+.dg .animated,
+.dg .animated * {
+  transition:
+    transform 260ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 200ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dg .animated,
+  .dg .animated * {
+    transition: none;
+  }
+}

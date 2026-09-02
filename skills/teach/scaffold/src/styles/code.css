@@ -1,0 +1,99 @@
+/* ============================================================
+   Code blocks. The markup is generated at build time by Shiki
+   (tools/shiki-preprocess.js) and rendered by
+   $lib/components/CodeBlock.svelte / CodeTabs.svelte.
+
+   Shiki is configured with defaultColor:false, so every token
+   carries both --shiki-light and --shiki-dark. Screen takes dark;
+   print.css takes light.
+   ============================================================ */
+
+.shiki,
+.shiki span {
+  color: var(--shiki-dark);
+  background-color: transparent;
+}
+
+pre.shiki {
+  background: var(--code-bg);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  margin: 0;
+  line-height: 1.6;
+  font-size: 0.85rem;
+  tab-size: 2;
+}
+
+pre.shiki code {
+  display: block;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--mono);
+  white-space: pre;
+}
+
+pre.shiki .line {
+  display: inline-block;
+  min-width: 100%;
+}
+
+pre.shiki .line.hl {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+.code-block {
+  margin: 1.25rem 0;
+}
+
+.code-title {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+/* ---------- language tabs ---------- */
+
+.code-tabs {
+  margin: 1.25rem 0;
+}
+
+.code-tabs .tab-bar {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.code-tabs .tab-btn {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+}
+
+.code-tabs .tab-btn:hover {
+  color: var(--text);
+}
+
+.code-tabs .tab-btn[data-state='active'] {
+  color: var(--cyan);
+  background: var(--code-bg);
+}
+
+.code-tabs .pane[hidden] {
+  display: none;
+}
+
+.code-tabs .pane pre.shiki {
+  border-top-left-radius: 0;
+}

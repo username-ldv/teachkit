@@ -1,0 +1,10 @@
+# Machine- and person-specific facts: local paths, ports already in use,
+# which repos the practice environments live in. Never published.
+skills/teach/references/LOCAL.md
+
+# A scaffold that has been installed and run in place.
+skills/teach/scaffold/node_modules/
+skills/teach/scaffold/.svelte-kit/
+skills/teach/scaffold/dist/
+
+.DS_Store

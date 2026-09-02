@@ -1,0 +1,30 @@
+{
+  "extends": "./.svelte-kit/tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "moduleResolution": "bundler"
+  },
+  // Lesson and reference pages carry raw, unescaped source inside <CodeBlock>,
+  // which only becomes valid Svelte after tools/shiki-preprocess.js has run.
+  // svelte-check applies markup preprocessors but still reports diagnostics
+  // against the original text, so it sees `i < len(nums)` as a broken tag.
+  // Those pages are compiled for real by `npm run build` (every route is
+  // prerendered) and smoke-tested by tools/check-pages.mjs; `npm run check`
+  // covers the component library, which is where the TypeScript actually is.
+  "exclude": [
+    "src/routes/lessons/**",
+    "src/routes/reference/**",
+    "src/routes/dev/**",
+    "src/routes/+page.svelte",
+    "node_modules/**",
+    ".svelte-kit/**",
+    "dist/**"
+  ]
+}

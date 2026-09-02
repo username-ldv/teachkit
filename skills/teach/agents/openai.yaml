@@ -1,0 +1,4 @@
+interface:
+  display_name: "Teach"
+  short_description: "Run a long-form course of interactive lessons"
+  default_prompt: "Use $teach in a course workspace to start, continue, or repair a course."
