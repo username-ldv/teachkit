@@ -151,8 +151,16 @@ still wobbles after that, the explanation is the problem.
 **26. Verify exercise specs by solving them.** Reference solutions in, suite green, type-check
 separately (Vitest transpiles without typechecking), formatter and linter clean, stubs restored.
 
-**27. Never author files containing backslashes or `$` through a shell heredoc.** The shell eats
-them, and `'\vdots'` becomes a vertical tab that renders as nothing.
+**27. Never write a backslash or a `$` through a shell command.** Use the file-editing tools. A
+heredoc eats them — `'\vdots'` arrives as a vertical tab and renders as nothing — and so does a
+script whose *source* travels through a shell, even a quoted heredoc, which is how a Windows path in
+a notes file became `D:` + CR + `epos` + TAB + `eachkit`.
+
+Two things made that one worse and are worth knowing on their own: the damage is invisible in
+ordinary output (CR and TAB look like whitespace), and **Python's text mode silently rewrites it**
+— `read_text()` turns a lone CR into `\n`, so the repair script searching for the broken bytes
+found nothing and the write-back split the line. Repair corruption in binary mode, or with
+`newline=''`.
 
 **28. An idempotent fixer is the only kind worth having.** The first TeX repair used a negative
 lookahead and turned `\\dots` into `\\\dots` on its second run. Normalise to the target state
