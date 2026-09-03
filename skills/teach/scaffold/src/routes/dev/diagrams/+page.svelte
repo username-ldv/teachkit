@@ -23,7 +23,7 @@
     Timeline,
     TraceTable
   } from '$lib/diagrams';
-  import { CodeBlock, CodeTabs, Quiz, Question, Callout } from '$lib/components';
+  import { CodeBlock, CodeTabs, Quiz, Question, NumericQuestion, Callout } from '$lib/components';
 </script>
 
 <svelte:head><title>Diagram gallery — every figure component</title></svelte:head>
@@ -461,6 +461,11 @@ go test ./dsa/lesson05 # Go
     {/snippet}
   </Question>
 </Quiz>
+
+<h2>NumericQuestion — a checkpoint with a number for an answer</h2>
+<NumericQuestion expected={0.75} tolerance={0.001} hint="Not yet — subtract the start, then divide by the span." correct="Yes — 0.75.">
+  <p>Where does 35 sit between 20 and 40, as a value from 0 to 1?</p>
+</NumericQuestion>
 
 <Callout kind="tip" title="Callout">
   <p>Callouts come in <code>note</code>, <code>tip</code>, <code>warn</code> and <code>deep</code>.</p>

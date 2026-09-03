@@ -11,9 +11,12 @@ A skeleton to copy is in [LESSON-TEMPLATE.md](LESSON-TEMPLATE.md).
 
 **1. `<svelte:head><title>`** — `Lesson N · Title — Course Name`.
 
-**2. `<LessonHeader>`** — number, title, minutes, exercise count, `builds`. Breadcrumbs, the
-"Lesson N of M" kicker, the track pills and the reference links all come from `$lib/course.ts`.
-Never hand-write navigation.
+**2. `<LessonHeader n={N} />`** — and nothing else. Title, reading time, exercise count, exercise
+time and `builds` are all read from `$lib/course.ts` by lesson number, along with the breadcrumbs,
+the "Lesson N of M" kicker, the track pills and the reference links. **Add the lesson to the
+manifest first.** Passing any of it as a prop is how a course ends up advertising one exercise count
+on its index card and a different one in its own header — that has happened, and the learner found
+it before anyone else did.
 
 **3. `<Recall>`** (lesson 2 onward) — three `<Question>`s drawn from *earlier* lessons only. Not the
 current one; that is what the checkpoints are for.
@@ -36,6 +39,8 @@ The arc that works:
 
 **6. `<h2 id="exercises">Exercises</h2>`** — see [EXERCISES.md](EXERCISES.md).
 
+Everything before this heading is a **checkpoint**, never an exercise. See below.
+
 **7. `<PrimarySource>`** — one source, fetched and verified this session, with a sentence on which
 part to read and why. Not a link dump: the *primary* source is one thing.
 
@@ -52,6 +57,29 @@ paid.
 **11. `<PrevNext n={N} />`**.
 
 ---
+
+## Checkpoints are not exercises
+
+Two different things give feedback inside a lesson, and conflating them breaks a promise the learner
+is counting on.
+
+A **checkpoint** is short — a `<Quiz>` of multiple-choice `<Question>`s, or a `<NumericQuestion>`
+where the answer is a number and the page checks it. It sits inside the section it tests, takes
+under a minute, and exists to make retrieval effortful. There are 3–4 per lesson and they are part
+of the *reading*.
+
+An **exercise** is substantial. It is done at a real keyboard, it states an invariant, it takes
+fifteen minutes at the least and often an hour or more, and it lives under the Exercises heading.
+There are four.
+
+From this:
+
+- **Never count checkpoint time in the exercise estimate.** A lesson with four three-minute prompts
+  has *zero* exercises, and saying otherwise is the single complaint this format has produced.
+- **State reading time and exercise time separately**, both in the manifest (`minutes` and
+  `exerciseTime`), both conservative.
+- **A migrated short prompt stays a checkpoint.** Carrying an old course's brief tasks forward is
+  fine; promoting them to "exercises" to satisfy the count is not.
 
 ## Writing the prose
 
@@ -92,6 +120,11 @@ propagated into reference sheets, glossary entries and exercise stubs.
 - `<Callout kind="note|tip|warn|deep">` — `deep` is the going-further aside, `warn` the trap.
 - `<Solution summary="…" kind="hint|solution">` — a spoiler. Hints yellow, worked answers green.
 - `<Playground>` — where the exercises live for this lesson.
+- `<NumericQuestion expected={…} tolerance={…} hint="…" correct="…">` — a checkpoint whose answer
+  is a number, checked live. The right shape whenever the retrieval is arithmetic; it prints with an
+  answer line instead of an input.
 - `<RepoRef path="…" line={…}>` — cite a real file in the learner's own codebase.
+- Wrap every `<table>` in `<div class="table-wrap">` so a wide one scrolls inside its own box
+  instead of pushing the page sideways.
 - `<PrimarySource title="…">` — reusable for a second source box mid-lesson when a section leans
   entirely on one document.

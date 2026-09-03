@@ -3,8 +3,8 @@
   Install the teachkit skills into every agent home found on this machine.
 
 .DESCRIPTION
-  Copies skills/teach and skills/teach-adapt into each target agent's skills
-  directory, replacing any previous copy. Nothing outside those two folders is
+  Copies every skills/* directory into each target agent's skills
+  directory, replacing any previous copy. Nothing outside those folders is
   touched.
 
 .PARAMETER Targets
@@ -34,7 +34,7 @@ $ErrorActionPreference = 'Stop'
 
 $repo = Split-Path -Parent $MyInvocation.MyCommand.Path
 $source = Join-Path $repo 'skills'
-$skills = @('teach', 'teach-adapt')
+$skills = @('teach', 'teach-adapt', 'teach-remake')
 
 # name -> the directory that must already exist, and where skills go inside it
 $homes = [ordered]@{

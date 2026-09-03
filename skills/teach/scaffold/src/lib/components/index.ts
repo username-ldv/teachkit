@@ -17,6 +17,7 @@ export { default as RepoRef } from './RepoRef.svelte';
 export { default as Quiz } from './Quiz.svelte';
 export { default as Recall } from './Recall.svelte';
 export { default as Question } from './Question.svelte';
+export { default as NumericQuestion } from './NumericQuestion.svelte';
 export { default as Exercise } from './Exercise.svelte';
 export { default as MoreProblems } from './MoreProblems.svelte';
 

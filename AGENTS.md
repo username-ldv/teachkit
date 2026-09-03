@@ -1,12 +1,17 @@
 # Working in this repository
 
-This repo *is* two agent skills. It has no build and no tests; the thing that has to work is the
+This repo *is* three agent skills. It has no build and no tests; the thing that has to work is the
 prose, and the one thing that can actually be verified is the scaffold.
 
 ```
 skills/teach/          SKILL.md · references/ · scaffold/ · agents/openai.yaml
 skills/teach-adapt/    SKILL.md · agents/openai.yaml
+skills/teach-remake/   SKILL.md · agents/openai.yaml
 ```
+
+`teach` owns the method; the other two are workflows over an existing course and link into
+`teach/references/` rather than restating it. When a rule changes, it changes in `teach/references/`
+and the workflows keep pointing at it.
 
 ## Rules
 

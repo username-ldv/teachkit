@@ -1,0 +1,4 @@
+interface:
+  display_name: "Teach — Remake"
+  short_description: "Aggressively rewrite existing lessons to a standard"
+  default_prompt: "Use $teach-remake with a lesson range to rethink those lessons against the current defaults."

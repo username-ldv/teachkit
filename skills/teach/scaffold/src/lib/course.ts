@@ -52,8 +52,15 @@ export type Lesson = {
   title: string;
   /** Shown on the index card — a `·`-separated tour of what the lesson covers. */
   blurb: string;
+  /** READING time only. Never fold exercise time into this. */
   minutes: string;
+  /** What the exercises are: "4 exercises incl. a ring buffer + a rate limiter". */
   exercises: string;
+  /**
+   * How long the exercises actually take, stated separately and conservatively.
+   * In-page checkpoints are not exercises and their time never counts here.
+   */
+  exerciseTime?: string;
   /** Which lesson numbers this one assumes. "Nothing — this is the start" for lesson 1. */
   builds: string;
 };
@@ -65,7 +72,8 @@ export const lessons: Lesson[] = [
   //   title: 'First Lesson',
   //   blurb: 'What it covers · and what else · and the third thing.',
   //   minutes: '~30 min',
-  //   exercises: '4 exercises',
+  //   exercises: '4 exercises incl. the thing they will actually build',
+  //   exerciseTime: '~90 min',
   //   builds: 'Nothing — this is the start'
   // }
 ];

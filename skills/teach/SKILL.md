@@ -29,6 +29,11 @@ Look at the directory before writing anything.
 Repair beats everything. If the user's message is "I don't understand X" or "isn't X wrong?",
 that is Mode C even mid-batch — and it is the highest-value work in this skill.
 
+Mode C is for **one section, one claim, one task**. If what is wrong is the lesson's depth, scope,
+order, or the practice it promises — anything where the fix is "rewrite it" rather than "correct
+it" — that is `/teach-remake`, which takes a lesson range and rethinks it against a standard. Say
+so rather than quietly starting a rewrite inside a repair.
+
 ## Orient — read these, in this order, every session
 
 1. `AGENTS.md` (or `CLAUDE.md`, whichever the workspace has) — workspace-specific build and
@@ -54,8 +59,9 @@ this learner's, and they are deliberately maximalist.
 | **Lesson length** | 25–35 minute read. Long is correct. When in doubt whether to explain something: explain. |
 | **Batch size** | 3 lessons, generated together, strictly sequential. |
 | **Sequencing** | Never use, quiz, or assume anything not taught earlier *in this course*. The baseline is written in `MISSION.md`; nothing else may be assumed. |
-| **Exercises** | 4 per lesson: build the thing · a classic problem at learning difficulty · a second angle · and a **practical real-world build** (green label). Plus 2 optional external problems per exercise. |
-| **Checkpoints** | 3–4 `<Quiz>` blocks through the lesson. Options equal length, retry until correct, explanation only on success. |
+| **Exercises** | 4 per lesson, each **substantial** — done at a real keyboard, with an invariant: build the thing · a classic problem at learning difficulty · a second angle · and a **practical real-world build** (green label). Plus 2 optional external problems per exercise. |
+| **Checkpoints** | 3–4 `<Quiz>` / `<NumericQuestion>` blocks through the lesson. Options equal length, retry until correct, explanation only on success. **A checkpoint is not an exercise** and its time never counts toward the exercise estimate. |
+| **Time** | Reading time and exercise time are stated **separately** and conservatively. Both live in the manifest, never in page props. |
 | **Spaced retrieval** | Lesson 2 onward opens with `<Recall>` — 3 questions from *earlier* lessons only. |
 | **Ratio** | Theory-heavy. Exercises serve the concepts, not the reverse. |
 | **Arithmetic** | Shown, never asserted. No "≈", no "clearly", no three steps compressed into one sentence. Use `<Derivation>`. |
@@ -148,3 +154,7 @@ have cost the most:
 | [STANDING-RULES.md](references/STANDING-RULES.md) | Before writing a batch; when a lesson fails |
 | [WORKSPACE-FILES.md](references/WORKSPACE-FILES.md) | Writing MISSION / RESOURCES / GLOSSARY / NOTES / learning records |
 | `references/LOCAL.md` | Machine-specific facts, if present. Gitignored — never publish anything from it |
+
+Two sibling skills handle work on courses that already exist: **`/teach-adapt`** migrates an older
+HTML-file course onto this platform without changing its content, and **`/teach-remake`** rewrites a
+range of lessons against a standard, changing content, order and scope.

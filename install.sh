@@ -2,8 +2,8 @@
 #
 # Install the teachkit skills into every agent home found on this machine.
 #
-# Copies skills/teach and skills/teach-adapt into each target agent's skills
-# directory, replacing any previous copy. Nothing outside those two folders is
+# Copies every skills/* directory into each target agent's skills
+# directory, replacing any previous copy. Nothing outside those folders is
 # touched.
 #
 #   ./install.sh                          # every agent home that exists
@@ -21,7 +21,7 @@ set -euo pipefail
 
 repo="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source_dir="$repo/skills"
-skills=(teach teach-adapt)
+skills=(teach teach-adapt teach-remake)
 
 home_root() {
   case "$1" in

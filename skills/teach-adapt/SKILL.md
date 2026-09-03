@@ -16,6 +16,19 @@ real component library.
 these lessons, quoted them back, and built exercises against them. The prose survives, the code
 survives byte-for-byte, and the figures get *better*. Anything else is a regression.
 
+**But fidelity protects content, not deficiencies.** A ported course will not meet the current
+standard in places — too few real exercises, thin derivations, an unpaid promise. Port it faithfully
+anyway, then say plainly, in the closing report and in `NOTES.md`, which parts of the standard it
+does not meet. Two things follow, and the first one has already gone wrong once:
+
+- **Never promote a weak thing to satisfy a count.** If the old lessons only had short in-page
+  prompts, those stay *checkpoints*. Calling four three-minute prompts "4 exercises" to match the
+  four-exercise default breaks a promise the learner is counting on, and they will notice.
+- **Never write a deficiency into `AGENTS.md` as though it were a decision.** "Lesson 1 retains its
+  three migrated tasks for source fidelity" reads as a rule for the future; it was a gap.
+
+Closing the gaps is `/teach-remake`'s job, and offering it is part of finishing this one.
+
 Read [`teach/SKILL.md`](../teach/SKILL.md) and its references first — this skill assumes them.
 
 ---
@@ -67,7 +80,9 @@ Two things are worth asking, and both should be *proposals*, not open questions:
    movement is the lesson, not the ones that would look impressive.
 2. **Anything the course was missing** relative to the current standard: the `<Recall>` spaced
    retrieval opener, external practice problems per exercise, a reference sheet the course keeps
-   almost-writing in its prose. Offer; do not impose.
+   almost-writing in its prose. Offer; do not impose — and where the gap is bigger than an addition
+   (the lessons are thin, mis-ordered, or promise practice they do not deliver), name it as a
+   `/teach-remake` job rather than half-doing it inside the port.
 
 Also confirm: keep the static HTML as well, or drop it? The reference migration dropped it — the
 dev server is how lessons are read now, and `npm run build` prerenders a static copy if one is ever
@@ -154,7 +169,9 @@ Run the full list in [VERIFICATION.md](../teach/references/VERIFICATION.md). The
 - Write the workspace `AGENTS.md` (template in
   [COURSE-SETUP.md](../teach/references/COURSE-SETUP.md)). This is what future sessions read first.
 - Append a section to `NOTES.md` recording the rebuild: the decisions taken, what became
-  interactive, how fidelity was proven, and any trap hit.
+  interactive, how fidelity was proven, and any trap hit. **Include the standards gap** — what the
+  ported course does not meet, stated as a gap rather than as a convention.
+- Offer `/teach-remake` for the lessons whose gaps a faithful port could not close, naming them.
 - Update `.agents/launch.json` to run the dev server.
 - Commit in two parts if the diff is large: the platform and the port separately.
 

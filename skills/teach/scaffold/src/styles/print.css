@@ -35,6 +35,21 @@
     display: none;
   }
 
+  /* A numeric checkpoint is still worth answering on paper — hide the input
+     and the live feedback, and leave a line to write on. */
+  .numeric-question input,
+  .numeric-question .feedback {
+    display: none;
+  }
+  .numeric-question::after {
+    content: 'Answer: __________________';
+    display: block;
+    margin-top: 0.45rem;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 9pt;
+  }
+
   details {
     border: none;
   }

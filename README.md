@@ -1,14 +1,20 @@
 # teachkit
 
-Two agent skills for running a personal, long-form course on any topic — and the SvelteKit project
-the courses are built from.
+Three agent skills for running a personal, long-form course on any topic — and the SvelteKit
+project the courses are built from.
 
 | Skill | Invoke | What it does |
 | --- | --- | --- |
 | `teach` | `/teach <topic>` · `/teach continue` | Interviews you, scaffolds a course, writes and repairs lessons |
-| `teach-adapt` | `/teach-adapt` | Migrates an older HTML-file course onto the same platform |
+| `teach-adapt` | `/teach-adapt` | Migrates an older HTML-file course onto the platform. Content survives byte-for-byte |
+| `teach-remake` | `/teach-remake 1-3` | Rewrites a range of lessons against a standard. Content, order and scope all change |
 
-Both are **user-invoked only**. They carry `disable-model-invocation: true` and say so in their
+The three are a ladder of blast radius. `/teach`'s repair mode fixes one section. `/teach-adapt`
+changes presentation and nothing else. `/teach-remake` may split a lesson, merge two, reorder the
+course, move where practice lives, or replace a lesson outright — so it audits first, shows you a
+before-and-after inventory, and waits for approval before writing.
+
+All three are **user-invoked only**. They carry `disable-model-invocation: true` and say so in their
 descriptions, so an agent will not wander into them because a conversation happened to mention
 learning something.
 
@@ -41,7 +47,8 @@ skills/
     agents/openai.yaml    Codex display metadata
   teach-adapt/
     SKILL.md              the migration
-    agents/openai.yaml
+  teach-remake/
+    SKILL.md              the rewrite
 ```
 
 `references/` covers the interview and topic archetypes, the pedagogy (retrieval, spacing, zone of
@@ -77,7 +84,7 @@ supports skills looks in one of these:
 | Codex | `~/.codex/skills/` | — |
 | Cross-agent (`skills` CLI) | `~/.agents/skills/` | `.agents/skills/` |
 
-Copy `skills/teach` and `skills/teach-adapt` into whichever applies. The scaffold needs Node 20+; it
+Copy the three `skills/*` directories into whichever applies. The scaffold needs Node 20+; it
 pins exact dependency versions, so `npm install` is reproducible without a lockfile.
 
 ### Machine-specific notes

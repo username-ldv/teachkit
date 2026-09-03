@@ -199,3 +199,21 @@ An HTML entity written inside a `{…}` expression prop is escaped rather than d
 the reader as literal `&rsquo;` — one instance, spotted in a screenshot. The fix took a minute; the
 crawler rule that fails on any escaped entity in served HTML takes it off the list permanently. Ask,
 every time: what class of thing is this, and can the page checker see it?
+
+**35. One fact, one home.**
+Anything a page states that the manifest also states will drift, and the learner finds it before you
+do. A lesson header once took its title and its timings as props while `course.ts` held them too;
+the index card and the header ended up disagreeing about how many exercises the lesson had. Derive
+from the manifest and pass the lesson number.
+
+**36. A short prompt is a checkpoint, not an exercise, and its time is reading time.**
+Four three-minute in-page questions were advertised as a lesson's practice, with reading and
+practice added into one number. It is the only complaint this format has produced about honesty
+rather than clarity. State reading time and exercise time separately, count only substantial work in
+the second, and be conservative in both.
+
+**37. Fidelity protects content, not deficiencies.**
+A faithful port means the prose and the code survive — it does not mean carrying a weak practice
+contract forward, and it certainly does not mean writing that weakness into the new workspace's
+rules as though it were a decision. Port the content, then say plainly which parts of the current
+standard the ported course does not meet, and offer to remake them.

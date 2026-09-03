@@ -6,6 +6,20 @@ notices.
 
 ---
 
+## What counts as an exercise
+
+An exercise is **substantial**: done at a real keyboard, stating an invariant, taking fifteen
+minutes at the least and often an hour or more. Four per lesson.
+
+A short feedback-bearing prompt inside a section is a **checkpoint**, not an exercise — see
+[LESSON-ANATOMY.md](LESSON-ANATOMY.md). Checkpoints are good and there should be several, but they
+are part of the reading. Their time never enters the exercise estimate, and four of them do not add
+up to one exercise. A course that advertised "4 in-page tasks" for four three-minute prompts had to
+be remade.
+
+State reading time and exercise time separately in the manifest, and state both conservatively. A
+learner who budgets an hour and needs three is worse served than one who is told three up front.
+
 ## The shape of a batch
 
 **Four per lesson**, in this order:
