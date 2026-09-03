@@ -1,6 +1,7 @@
 <script lang="ts">
   import {
     ArrayStepper,
+    BinarySearchLab,
     Cells,
     CellsTrace,
     DecisionFlow,
@@ -10,11 +11,14 @@
     HashTable,
     LinkedList,
     MemoryRegions,
+    MergeSortTree,
+    PartitionLab,
     Pipeline,
     PointerBox,
     RecursionTree,
     RingBuffer,
     Sequence,
+    SortLab,
     StackFrames,
     Timeline,
     TraceTable
@@ -324,6 +328,30 @@
 
 <h2>RecursionTree — interactive</h2>
 <RecursionTree title="the fib call tree" n={5} />
+
+<h2>BinarySearchLab — interactive</h2>
+<BinarySearchLab
+  title="binary search, one probe at a time"
+  caption="Toggle to <b>linear</b> and repeat the same search: same data, same answer, wildly different comparison count. Offering the rival strategy on a switch is what turns a demonstration into an argument."
+/>
+
+<h2>SortLab — interactive</h2>
+<SortLab
+  title="three algorithms, four input shapes, real counters"
+  caption="The model is <code>$lib/diagrams/sorting.ts</code>, so a lesson can import the same functions and quote numbers that cannot drift from the ones on screen."
+/>
+
+<h2>PartitionLab — interactive</h2>
+<PartitionLab
+  title="two indices moving at different speeds"
+  caption="Colour is the invariant, not decoration — paint the regions your invariant names and the figure explains itself."
+/>
+
+<h2>MergeSortTree — interactive</h2>
+<MergeSortTree
+  title="a recursive process drawn as rows, not a tree"
+  caption="Every row is the same width, which <em>is</em> the &ldquo;each level costs n, and there are log n levels&rdquo; argument. A tree drawing hides exactly that."
+/>
 
 <h2>Timeline</h2>
 <Timeline

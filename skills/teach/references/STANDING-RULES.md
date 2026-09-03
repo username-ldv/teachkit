@@ -168,3 +168,34 @@ instead of patching towards it.
 
 **29. Look at the page.** Every remaining category of defect — overlap, clipping, a figure scaled to
 2.3×, a stylesheet regression — is invisible to every check except a screenshot.
+
+**30. When a lesson quotes numbers that a figure also shows, share the module.**
+Lesson 8's comparison-and-write table and the counters under its interactive figure were, at first,
+two separate implementations of three sorting algorithms. Extracting the model into a plain `.ts`
+file that both the component and the author use makes the prose and the screen incapable of drifting
+apart — and lets you re-derive the table by running the module. Do this whenever a claim in text and
+a claim in a figure are the same claim.
+
+**31. Scope a famous bug before repeating it.**
+`(lo + hi) / 2` overflowing is real, is well documented, and is *unreachable* in Go on a 64-bit
+machine and in JavaScript at any size. Saying "this will crash your code" would have been received
+wisdom rather than teaching. Check whether the classic failure is reachable in the languages the
+course actually uses; then, if the safe form is still worth writing, give the reasons that survive
+the scoping.
+
+**32. When a property cannot be observed, say so instead of faking a test for it.**
+Stability is invisible on an array of plain integers: two equal values *are* the same value, which is
+exactly why Go's `slices.Sort` promises nothing about it. The fix was not a cleverer assertion, it
+was a small record type carrying a field the comparator never reads — plus a comment in the spec
+saying why that type exists. A test that cannot fail teaches nothing.
+
+**33. If the lesson teaches a failure mode, the exercise should reproduce it, asserted.**
+Reading "quicksort is O(n²) in the worst case" and watching your own function make exactly 499,500
+comparisons on 1,000 already-sorted numbers are different experiences. Ask for the naive version
+*and* pin its cost, then ask for the fix and pin that too. The failure is part of the specification.
+
+**34. Every bug you find by eye should leave a check behind.**
+An HTML entity written inside a `{…}` expression prop is escaped rather than decoded, so it reaches
+the reader as literal `&rsquo;` — one instance, spotted in a screenshot. The fix took a minute; the
+crawler rule that fails on any escaped entity in served HTML takes it off the list permanently. Ask,
+every time: what class of thing is this, and can the page checker see it?

@@ -9,6 +9,13 @@
 #   ./install.sh                          # every agent home that exists
 #   ./install.sh --targets claude,codex   # only these
 #   ./install.sh --list                   # show where things would go
+#   ./install.sh --copy                   # real copies everywhere, no symlinks
+#
+# Agents increasingly read the vendor-neutral ~/.agents/skills as well as their
+# own home, so a real copy in each one shows up as the SAME skill twice in the
+# menu. When .agents is among the targets it gets the real copy and the others
+# get a symlink to it. Pass --copy if an agent turns out not to follow a
+# symlinked skill directory.
 #
 set -euo pipefail
 
@@ -27,13 +34,15 @@ home_root() {
 
 targets=()
 list_only=0
+force_copy=0
 
 while [ $# -gt 0 ]; do
   case "$1" in
     --targets) IFS=, read -r -a targets <<< "$2"; shift 2 ;;
     --targets=*) IFS=, read -r -a targets <<< "${1#*=}"; shift ;;
     --list) list_only=1; shift ;;
-    -h|--help) sed -n '2,12p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'; exit 0 ;;
+    --copy) force_copy=1; shift ;;
+    -h|--help) sed -n '2,19p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'; exit 0 ;;
     *) echo "unknown argument: $1" >&2; exit 2 ;;
   esac
 done
@@ -48,16 +57,43 @@ if [ ${#targets[@]} -eq 0 ]; then
   fi
 fi
 
+# .agents gets the real copy and goes first; the rest link to it.
+canonical=""
+if [ "$force_copy" -eq 0 ]; then
+  for name in "${targets[@]}"; do
+    [ "$name" = "agents" ] && canonical="agents"
+  done
+fi
+if [ -n "$canonical" ]; then
+  ordered=("$canonical")
+  for name in "${targets[@]}"; do
+    [ "$name" != "$canonical" ] && ordered+=("$name")
+  done
+  targets=("${ordered[@]}")
+fi
+
 for name in "${targets[@]}"; do
   root="$(home_root "$name")" || { echo "unknown target: $name" >&2; exit 2; }
   dest="$root/skills"
   if [ "$list_only" -eq 1 ]; then
-    echo "$name -> $dest"
+    how="copy"
+    [ -n "$canonical" ] && [ "$name" != "$canonical" ] && how="link"
+    echo "$name -> $dest ($how)"
     continue
   fi
   mkdir -p "$dest"
   for skill in "${skills[@]}"; do
-    rm -rf "${dest:?}/$skill"
+    # -e is false for a broken symlink, so test for the link itself too.
+    if [ -e "${dest:?}/$skill" ] || [ -L "${dest:?}/$skill" ]; then
+      rm -rf "${dest:?}/$skill"
+    fi
+
+    if [ -n "$canonical" ] && [ "$name" != "$canonical" ]; then
+      ln -s "$(home_root "$canonical")/skills/$skill" "$dest/$skill"
+      echo "linked    $skill -> $dest/$skill"
+      continue
+    fi
+
     cp -r "$source_dir/$skill" "$dest/$skill"
     # node_modules and build output can exist if the scaffold was run in place.
     rm -rf "$dest/$skill/scaffold/node_modules" \

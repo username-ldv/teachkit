@@ -89,6 +89,10 @@ for (const [route, html] of pages) {
   if (html.includes('katex-error')) problems.push('KaTeX parse error');
   if (BOX_DRAWING.test(html)) problems.push('box-drawing characters — ASCII art, make it a diagram');
   if (/&amp;#12[35];/.test(html)) problems.push('double-escaped brace in text');
+  // An entity written inside a {…} expression prop is escaped rather than
+  // decoded, so it reaches the reader as literal "&rsquo;" text.
+  const ent = html.match(/&amp;(?:[a-zA-Z][a-zA-Z0-9]{1,10}|#\d{2,5});/);
+  if (ent) problems.push(`escaped HTML entity in text (${ent[0]}) — it will render literally`);
 
   const stats = {
     figures:

@@ -60,7 +60,13 @@ powershell -ExecutionPolicy Bypass -File install.ps1
 ```
 
 Both install into every agent home they find, and take an explicit list when you want fewer:
-`-Targets claude,codex` / `--targets claude,codex`.
+`-Targets claude,codex` / `--targets claude,codex`. Add `-List` / `--list` to see where things would
+go without touching anything.
+
+**One real copy, not three.** Agents increasingly read the vendor-neutral `~/.agents/skills` *as well
+as* their own home, so a real copy in each one appears as the same skill twice in the menu. When
+`.agents` is among the targets it gets the real copy and the others are symlinked to it. If an agent
+turns out not to follow a symlinked skill directory, re-run with `-Copy` / `--copy` and tell us.
 
 Or copy by hand — the skills are plain directories with a `SKILL.md` inside, and every agent that
 supports skills looks in one of these:
