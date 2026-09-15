@@ -49,8 +49,9 @@ Run the whole list. It is not long, and skipping the boring half is how the bori
 - [ ] **`/dev/diagrams`** still renders every component, including any you added.
 - [ ] **Interactive figures**: the untouched first frame is a meaningful state, and the caption reads
       correctly without the controls.
-- [ ] **Narrow window.** Nothing overflows horizontally; wide figures scroll inside their own box
-      rather than pushing the page.
+- [ ] **No sideways scroll at full width.** Nothing overflows horizontally; wide figures scroll
+      inside their own box rather than pushing the page. Desktop width only — the learner reads on a
+      PC, and a phone-width pass once cost a whole verification round on a screen nobody uses.
 - [ ] **Print preview** on at least one lesson and one reference sheet. Code wraps, controls are
       hidden, colours are ink.
 
