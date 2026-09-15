@@ -5,8 +5,7 @@
    Every diagram is real SVG, sized in a viewBox and scaled to the
    column width. Colour is never hard-coded in a component: each
    component paints with these variables so the whole course stays
-   on one palette and the print stylesheet can recolour everything
-   in one place.
+   on one palette, recolourable in one place.
    ============================================================ */
 
 .figure {

@@ -31,8 +31,7 @@
       {/each}
     </Tabs.List>
     {#each panes as pane (pane.label)}
-      <!-- Every pane stays in the DOM (bits-ui only toggles `hidden`), so
-           print.css can unhide them all and label each one. -->
+      <!-- Every pane stays in the DOM; bits-ui only toggles `hidden`. -->
       <Tabs.Content value={pane.label} class="pane" data-lang={pane.label}>
         <!-- eslint-disable-next-line svelte/no-at-html-tags -- build-time Shiki output -->
         {@html pane.html}

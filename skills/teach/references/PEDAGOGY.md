@@ -108,7 +108,7 @@ lesson 4 having never been introduced — the memory model got taught by using i
 ## Reference documents
 
 Lessons are read once. Reference sheets are read for years. They are the compressed essence — the
-price list, the decision flow, the syntax table, the red flags in review — and they must print well.
+price list, the decision flow, the syntax table, the red flags in review.
 
 Create them as the course earns them, and **extend rather than duplicate**: one structure-picker
 sheet that grows is worth more than five per-topic sheets. Link them from the lesson header

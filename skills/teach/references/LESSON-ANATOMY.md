@@ -121,8 +121,7 @@ propagated into reference sheets, glossary entries and exercise stubs.
 - `<Solution summary="…" kind="hint|solution">` — a spoiler. Hints yellow, worked answers green.
 - `<Playground>` — where the exercises live for this lesson.
 - `<NumericQuestion expected={…} tolerance={…} hint="…" correct="…">` — a checkpoint whose answer
-  is a number, checked live. The right shape whenever the retrieval is arithmetic; it prints with an
-  answer line instead of an input.
+  is a number, checked live. The right shape whenever the retrieval is arithmetic.
 - `<RepoRef path="…" line={…}>` — cite a real file in the learner's own codebase.
 - Wrap every `<table>` in `<div class="table-wrap">` so a wide one scrolls inside its own box
   instead of pushing the page sideways.

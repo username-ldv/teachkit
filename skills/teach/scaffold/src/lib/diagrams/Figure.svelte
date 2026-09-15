@@ -3,7 +3,7 @@
 
   /**
    * The frame every diagram sits in: an optional small-caps title, the drawing,
-   * an optional controls strip (hidden when printing), and a caption.
+   * an optional controls strip, and a caption.
    *
    * `minWidth` gives the drawing a floor below which the figure scrolls
    * sideways instead of squashing — labels stay readable on a narrow window.

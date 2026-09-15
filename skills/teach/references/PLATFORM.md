@@ -35,7 +35,7 @@ do not "fix" it by removing the exclusions.
 ```
 src/
   app.css                  palette (the single source of colour) + Tailwind theme + shadcn tokens
-  styles/                  prose.css · code.css · diagram.css · print.css
+  styles/                  prose.css · code.css · diagram.css
   lib/
     course.ts              THE MANIFEST — identity, lesson order, roadmap. Edit this first.
     components/            lesson chrome: LessonHeader, Quiz, Exercise, Callout, CodeTabs …
@@ -87,8 +87,8 @@ swift · sql · text). `title="…"` adds a caption, `hl="3,7-9"` highlights lin
 is one pane per track; the chosen track is global and remembered across pages
 (`$lib/lang.svelte.ts`).
 
-Keep lines under ~90 characters. Paper cannot scroll, and the print stylesheet wraps rather than
-clipping — but a wrapped line of code is still worse than a broken-up one.
+Keep lines under ~90 characters. A long line scrolls its block sideways, and a line the reader has
+to drag to finish is a line they skip.
 
 ---
 
@@ -108,8 +108,8 @@ these through a shell heredoc — the shell eats the backslashes before Svelte e
 ## Colour
 
 `src/app.css` is the single source. `--accent` is the course's identity; everything else derives.
-Never write a hex value in a component or a page — pass a `tone` and let the palette and
-`print.css` stay in charge.
+Never write a hex value in a component or a page — pass a `tone` and let the palette stay in
+charge.
 
 One accent per course, distinct from the others, so two open tabs are distinguishable.
 

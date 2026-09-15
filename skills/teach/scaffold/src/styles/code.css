@@ -4,8 +4,8 @@
    $lib/components/CodeBlock.svelte / CodeTabs.svelte.
 
    Shiki is configured with defaultColor:false, so every token
-   carries both --shiki-light and --shiki-dark. Screen takes dark;
-   print.css takes light.
+   carries both --shiki-light and --shiki-dark. The course takes
+   the dark one everywhere.
    ============================================================ */
 
 .shiki,

@@ -131,8 +131,8 @@ Then, in order:
    never change), `title`, `kicker`, `short`, `tagline`, `tracks`, `headerLinks`. Leave `lessons`
    empty until the first batch exists.
 2. **`src/app.css`** — set `--accent` to something distinct for this course. Every other colour is
-   derived; the diagram tones, the print stylesheet and the shadcn tokens all follow. One accent per
-   course, so the learner can tell two open tabs apart.
+   derived; the diagram tones and the shadcn tokens all follow. One accent per course, so the
+   learner can tell two open tabs apart.
 3. **`src/routes/+page.svelte`** — the index. Replace the placeholder practice-environment box with
    the real one, or delete it.
 4. **`static/favicon.svg`** — swap the glyph.

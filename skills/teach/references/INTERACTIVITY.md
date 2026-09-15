@@ -13,8 +13,7 @@ component and put it in `/dev/diagrams`** — the next lesson gets it for free, 
 the one place the visual language can be reviewed.
 
 Colour is never a hex value in a page or a component. Pass a `tone`
-(`accent · green · yellow · red · purple · cyan · faint`) so the palette and the print stylesheet
-stay in charge.
+(`accent · green · yellow · red · purple · cyan · faint`) so the palette stays in charge.
 
 `npm run check:pages` fails on box-drawing characters anywhere in the served HTML. That check exists
 because ASCII art creeps back in under time pressure.
@@ -24,7 +23,7 @@ because ASCII art creeps back in under time pressure.
 ## When interaction earns its keep
 
 A static figure is not a failure. Most figures should be static: comparing two distant states at a
-glance is exactly what a still picture is for, and a printed page has no buttons.
+glance is exactly what a still picture is for.
 
 Reach for interaction when **the movement is the lesson**. Three tests — if none of them is a yes,
 build it static:
@@ -58,9 +57,10 @@ instead of believing it. Count the same events the prose counts, and say in the 
 comment exactly what one unit is (a swap is two writes, not one), because the exercise suite will
 assert those numbers later.
 
-**A meaningful static first frame is mandatory.** Every page is prerendered and printed. Whatever
-the figure shows before anyone touches it must be a sentence-worthy state on its own, and the
-caption must make sense without the controls. `.figure-controls` is hidden by `print.css`.
+**A meaningful static first frame is mandatory.** Every page is prerendered, and the resting state
+is what the reader meets first — often the only state they see. Whatever the figure shows before
+anyone touches it must be a sentence-worthy state on its own, and the caption must make sense
+without the controls.
 
 **Controls, not autoplay.** The learner sets the pace. Give buttons or a slider; do not animate on
 load. If something genuinely must move on its own, respect `prefers-reduced-motion` and provide the

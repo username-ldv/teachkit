@@ -67,7 +67,7 @@ this learner's, and they are deliberately maximalist.
 | **Arithmetic** | Shown, never asserted. No "≈", no "clearly", no three steps compressed into one sentence. Use `<Derivation>`. |
 | **Figures** | Components from `$lib/diagrams`. **No ASCII art. No hand-written `<svg>` in a page.** |
 | **Interactivity** | Where the *movement* is the lesson — never decorative. See [INTERACTIVITY.md](references/INTERACTIVITY.md). |
-| **Theme** | Dark. Print styles flip to ink. |
+| **Theme** | Dark, always. No light mode, no print stylesheet — the learner reads on screen. |
 | **Screen** | A PC. Pages are checked at full desktop width; no phone-width pass, and no effort spent on small-screen layouts. |
 | **Every lesson ends with** | Primary source (fetched and verified) · further reading · ask-your-teacher box · prev/next. |
 

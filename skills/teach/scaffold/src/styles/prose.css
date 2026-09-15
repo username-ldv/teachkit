@@ -293,8 +293,8 @@ tr:nth-child(even) td { background: rgba(255, 255, 255, 0.015); }
 .quiz .q-explain.show { display: block; }
 
 /* Wide tables scroll inside their own box rather than pushing the page.
-   Wrap EVERY <table> in one of these; paper cannot scroll either, and an
-   unwrapped table is how a reference sheet loses its right-hand columns. */
+   Wrap EVERY <table> in one of these; an unwrapped table is how a reference
+   sheet pushes the whole page sideways. */
 .table-wrap {
   overflow-x: auto;
   margin: 1.125rem 0;
@@ -499,9 +499,6 @@ a.lesson-card:hover {
   padding: 1rem 1.25rem;
 }
 .ref-grid .cell h3, .ref-grid .cell h4 { margin-top: 0; }
-
-/* ---------- print ---------- */
-
 
 @media (max-width: 640px) {
   body { font-size: 16px; }

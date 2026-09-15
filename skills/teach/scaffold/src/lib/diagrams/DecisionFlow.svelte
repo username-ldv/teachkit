@@ -3,9 +3,9 @@
    * The "which structure?" decision tree, as a real branching diagram.
    *
    * Rendered with nested lists and CSS connector rules rather than SVG: the
-   * text wraps, the branches stay aligned, and it prints and copies as text —
-   * which matters, because this one is a reference sheet people actually use
-   * at a keyboard.
+   * text wraps, the branches stay aligned, and it copies as text — which
+   * matters, because this one is a reference sheet people actually use at a
+   * keyboard.
    */
   export type Branch = {
     /** The question or condition on this branch. */

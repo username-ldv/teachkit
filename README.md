@@ -30,7 +30,6 @@ A prerendered SvelteKit app, read at `http://127.0.0.1:8321`:
 - **Maths is KaTeX**, in a `<Derivation>` component that aligns each step on the relation symbol
   with the reason beside it — because the arithmetic gets shown, never asserted.
 - **Quizzes** retry until correct and withhold the explanation until you get there.
-- **Everything prints**: the dark palette flips to ink, controls disappear, code wraps.
 
 Around the lessons sits the workspace itself — a mission, curated sources, a glossary gated on
 demonstrated understanding, learning records, and a notes file that accumulates every place a lesson

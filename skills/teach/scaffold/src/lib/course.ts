@@ -85,7 +85,7 @@ export const roadmap: { n: string; text: string }[] = [
 
 export type Reference = { slug: string; title: string; blurb: string };
 
-/** Print-friendly compressed sheets: /reference/<slug>. */
+/** Compressed reference sheets: /reference/<slug>. */
 export const references: Reference[] = [];
 
 export const lessonHref = (slug: string) => `/lessons/${slug}`;
