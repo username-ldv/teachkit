@@ -84,7 +84,7 @@ at and what it means — not what the picture contains.
 
 | Component | For | Interactive |
 | --- | --- | --- |
-| `Figure` | the frame every diagram sits in: title, drawing, controls strip, caption | |
+| `Figure` | the frame every diagram sits in: title, live status row, controls strip, drawing, caption | |
 | `Sequence` | several `plain` figures laid out as step 1 / step 2 / step 3 | |
 | `Cells` / `CellRow` | one row of boxes: arrays, slices, buckets, ring storage. `marks` for pointers, `loops` for a back-edge | |
 | `CellsTrace` | the same row repeated per step — a whole trace, comparable at a glance | |
@@ -107,12 +107,16 @@ at and what it means — not what the picture contains.
 | `SortLab` | three algorithms x four input shapes, with real comparison and write counters | ● |
 | `PartitionLab` | two indices moving at different speeds; colour is the invariant | ● |
 | `MergeSortTree` | a recursive process drawn as equal-width ROWS rather than a tree | ● |
+| `BinaryTree` | any binary tree from nested data. Two layouts: `tidy` (x = in-order rank) and `level` (x = complete-tree slot, for array-backed structures). `bare` drops the frame so a lab can compose it | |
+| `BSTLab` | the same keys inserted in four different orders, stepped, with a height readout against the best possible | ● |
+| `TraversalLab` | one tree, four visit orders, with the output row and the live stack/queue beside it | ● |
+| `HeapLab` | a tree view and an array view driven by ONE array, with the sift path lit in both | ● |
 
 `/dev/diagrams` is also the **props reference**: every component is rendered there with real
 props. Read it, or the component source, before using one — the prop names are not guessable
 (`Pipeline` takes `steps` and `edges`, not `stages`), and a wrong one prerenders as a 500.
 
-The last nine are **worked examples**, not furniture — they were built for a data-structures course.
+The last thirteen are **worked examples**, not furniture — they were built for a data-structures course.
 Read them for the interaction patterns, then delete the ones your topic will not use. Three of those
 patterns are topic-independent and worth stealing outright:
 
@@ -123,6 +127,14 @@ patterns are topic-independent and worth stealing outright:
   comparison count, which turns a demonstration into an argument the learner runs themselves.
 - **Draw levels as equal-width rows, not as a tree,** when the point is that every level costs the
   same. `MergeSortTree` makes "n per row, log n rows" the picture; a tree drawing hides exactly that.
+- **Let the layout carry the invariant.** `BinaryTree`'s `tidy` mode places each node at its
+  in-order rank, so on a correct binary search tree the page reads left-to-right in sorted order and
+  a violated invariant is visible as a node sitting in the wrong place horizontally. The reader
+  checks the claim by looking, not by trusting the caption.
+- **Show one structure in two representations, driven by one model.** `HeapLab` renders a tree and
+  an array from the same array, so the two views *cannot* disagree — which is the thing being taught
+  (a heap IS an array) rather than an illustration of it. Reach for this whenever a lesson says "X is
+  really Y".
 
 ---
 
@@ -133,21 +145,28 @@ patterns are topic-independent and worth stealing outright:
    *stretch* — without this, a 334-unit-wide figure renders at 2.3× and its text is a different size
    from every other figure on the page.
 2. Wrap it in `<Figure>`. Pass `minWidth` when squashing would make labels illegible; the figure
-   then scrolls sideways instead.
-3. Use the `.dg` primitives in `diagram.css` (`.box` + tone, `.val`, `.label`, `.arrow` + tone,
+   then scrolls sideways instead. `minWidth` is a **floor on shrinking, never a target**: a drawing
+   narrower than the floor renders at its own size. Express it as a `max-width`, not a `min-width` —
+   a `min-width` floor stretches a narrow drawing *up* to meet it, and every stepping lab starts at
+   one element, so that is exactly when it bites. It rendered a one-node tree at 6.4×.
+3. If the drawing **changes size** as the reader steps — a tree that grows, a heap that gains a row,
+   a call tree that widens — pass `pinControls`. It puts the status and controls *above* the
+   drawing. With them underneath, every press moves the button out from under the cursor: a growing
+   tree took its "insert" button half a screen down the page while it was being clicked.
+4. Use the `.dg` primitives in `diagram.css` (`.box` + tone, `.val`, `.label`, `.arrow` + tone,
    `.curve`, `.axis`) and the helpers in `geom.ts` (`monoWidth`, `toneClass`, `arrowHead`, `elbow`,
    `arc`, `onCircle`). Arrowhead markers are defined once in `ArrowDefs`, rendered by the root
    layout; a marker takes its colour from itself, not from the path referencing it, so there is one
    marker per tone.
-4. **SVG text does not wrap.** Anything longer than a few words belongs in the caption, or in an
+5. **SVG text does not wrap.** Anything longer than a few words belongs in the caption, or in an
    HTML layout with small SVGs inside it — that is what `MemoryRegions` had to become.
-5. Size gutters from the data: a fixed 150px note column with no notes in it scales the whole
+6. Size gutters from the data: a fixed 150px note column with no notes in it scales the whole
    viewBox down and renders every label at 6px.
-6. Keyed `{#each}` blocks over values that can repeat must key **by index**. Two columns both named
+7. Keyed `{#each}` blocks over values that can repeat must key **by index**. Two columns both named
    `tail` produced an `each_key_duplicate` hydration crash that silently truncated a lesson to 9 of
    its 29 figures.
-7. Add it to `src/lib/diagrams/index.ts` **and** to `/dev/diagrams` in the same commit.
-8. Look at it in a browser. A figure that overlaps or clips is a bug, and only a screenshot will
+8. Add it to `src/lib/diagrams/index.ts` **and** to `/dev/diagrams` in the same commit.
+9. Look at it in a browser. A figure that overlaps or clips is a bug, and only a screenshot will
    tell you.
 
 ---

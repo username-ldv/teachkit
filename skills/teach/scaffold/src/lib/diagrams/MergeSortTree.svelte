@@ -132,7 +132,7 @@
   }
 </script>
 
-<Figure {title} {caption} {plain} minWidth="34rem">
+<Figure {title} {caption} {plain} statusLabel="this row" minWidth="34rem">
   <svg
     class="dg"
     viewBox="0 0 {W} {H}"
@@ -191,18 +191,16 @@
     </span>
   {/snippet}
 
-  {#snippet captionSnippet()}
-    <p style="margin:0">
-      <b>
-        {#if cur.kind === 'split'}
-          {active === 0
-            ? 'One run of ' + n + ', not sorted.'
-            : 'Split: the boundaries moved, not a single element.'}
-          {active === deepestIndex ? ' A run of one element is sorted by definition — that is the base case.' : ''}
-        {:else}
-          Merge: every pair of neighbouring runs becomes one sorted run of twice the length.
-        {/if}
-      </b>{caption ? ' ' : ''}{@html caption}
-    </p>
+  {#snippet status()}
+    {#if cur.kind === 'split'}
+      {active === 0
+        ? 'One run of ' + n + ', not sorted.'
+        : 'Split: the boundaries moved, not a single element.'}
+      {active === deepestIndex
+        ? ' A run of one element is sorted by definition — that is the base case.'
+        : ''}
+    {:else}
+      Merge: every pair of neighbouring runs becomes one sorted run of twice the length.
+    {/if}
   {/snippet}
 </Figure>

@@ -5,7 +5,8 @@
    Every diagram is real SVG, sized in a viewBox and scaled to the
    column width. Colour is never hard-coded in a component: each
    component paints with these variables so the whole course stays
-   on one palette, recolourable in one place.
+   on one palette and the print stylesheet can recolour everything
+   in one place.
    ============================================================ */
 
 .figure {
@@ -43,6 +44,58 @@
   margin-bottom: 0.75rem;
 }
 
+/* The live, per-step sentence.
+
+   It used to be the bold opening clause of the caption, in the same paragraph
+   as the fixed text. Every arrow press changed its length, the static half
+   reflowed around it, and there was no visual seam telling you which words
+   were going to move. So it gets its own labelled row, directly under the
+   drawing it describes and above the dashed controls rule, and the caption
+   below it is now purely static.
+
+   `min-height` reserves two lines: 1rem of padding plus 2 x 1.2rem of text.
+   Almost every status is one line, and the reservation is what stops a
+   one-line-to-two-line change from shunting the controls and the caption down
+   the page mid-read. Keep it in step with the padding and line-height below. */
+.figure-status {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 3.4rem;
+  margin: 0.85rem 0 0;
+  padding: 0.5rem 0.75rem;
+  border-left: 2px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  background: var(--surface-2);
+}
+
+.figure-status-label {
+  flex: none;
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.figure-status-text {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--bright);
+}
+
+/* Narrow windows wrap the same sentence over about twice as many lines, so the
+   reservation has to grow with them or the caption starts moving again on a
+   phone. Four lines covers every status in the library, measured rather than
+   guessed — the longest is MergeSortTree's deepest-split row. */
+@media (max-width: 40rem) {
+  .figure-status {
+    min-height: 5.8rem;
+  }
+}
+
 .figure-caption {
   margin: 0.75rem 0 0;
   font-size: 0.87rem;
@@ -60,9 +113,19 @@
   overflow-y: hidden;
 }
 
+/* `--fig-min` is the narrowest this drawing may be squashed to before the
+   figure gives up and scrolls instead: a floor on legibility, and it only
+   binds on a window narrower than the drawing.
+
+   It used to be written as `min-width`, which is the same idea stated
+   backwards — a floor expressed that way scales the drawing UP whenever the
+   drawing is NARROWER than the floor. Every stepping lab starts at one
+   element, so that is precisely when it bit: BSTLab's first insert rendered
+   at 6.4x, a single key in a box taller than a paragraph, and HeapLab's at
+   2.06x. As a max-width the floor can only ever shrink the drawing, so a
+   drawing with three nodes in it is simply small. */
 .figure-scroll > svg.dg {
-  min-width: var(--fig-min, 34rem);
-  max-width: none;
+  max-width: max(100%, var(--fig-min, 34rem));
 }
 
 /* ---------- interactive controls under a diagram ---------- */
@@ -75,6 +138,23 @@
   margin-top: 0.9rem;
   padding-top: 0.8rem;
   border-top: 1px dashed var(--border-soft);
+}
+
+/* Pinned layout: the status and controls sit ABOVE a drawing that changes
+   size, so the button under the reader's cursor never moves. The dashed rule
+   moves to the underside, where it still separates the controls from the
+   drawing. See the `pinControls` prop on Figure.svelte for why. */
+.figure-status.pinned {
+  margin: 0 0 0.85rem;
+}
+
+.figure-controls.pinned {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  padding-top: 0;
+  padding-bottom: 0.8rem;
+  border-top: none;
+  border-bottom: 1px dashed var(--border-soft);
 }
 
 .figure-controls .spacer {

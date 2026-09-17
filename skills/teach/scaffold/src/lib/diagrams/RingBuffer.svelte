@@ -127,7 +127,7 @@
   const gx = (i: number) => (W - gridW) / 2 + i * CW + CW / 2;
 </script>
 
-<Figure {title} {caption} {plain} minWidth="32rem">
+<Figure {title} {caption} {plain} statusLabel="last action" minWidth="32rem">
   <svg class="dg" viewBox="0 0 {W} {H}" width={W} height={H} role="img" aria-label={title}>
     <text class="label" x={PAD} y={ROW_Y - 22}>index:</text>
     <CellRow {cells} x={(W - gridW) / 2} y={ROW_Y} w={CW} h={CH} />
@@ -196,8 +196,5 @@
     </span>
   {/snippet}
 
-  {#snippet captionSnippet()}
-    <span>{@html caption}</span>
-    {#if lastAction}<br /><code>{lastAction}</code>{/if}
-  {/snippet}
+  {#snippet status()}{lastAction || 'nothing yet — press an operation below'}{/snippet}
 </Figure>

@@ -2,6 +2,10 @@
   import {
     ArrayStepper,
     BinarySearchLab,
+    BinaryTree,
+    BSTLab,
+    HeapLab,
+    TraversalLab,
     Cells,
     CellsTrace,
     DecisionFlow,
@@ -339,6 +343,69 @@
 <SortLab
   title="three algorithms, four input shapes, real counters"
   caption="The model is <code>$lib/diagrams/sorting.ts</code>, so a lesson can import the same functions and quote numbers that cannot drift from the ones on screen."
+/>
+
+<h2>BinaryTree — tidy layout (x is in-order rank)</h2>
+<BinaryTree
+  title="a binary search tree, with the nil slots drawn"
+  caption="The <code>tidy</code> layout places each node at its IN-ORDER rank, so left-to-right on the page is sorted order — which makes an ordering invariant a property of the picture rather than a claim about it."
+  root={{
+    v: 50,
+    nil: true,
+    left: {
+      v: 30,
+      nil: true,
+      left: { v: 20, nil: true },
+      right: { v: 40, nil: true, tone: 'accent' }
+    },
+    right: { v: 70, nil: true, left: { v: 60, nil: true }, right: { v: 80, nil: true } }
+  }}
+/>
+
+<h2>BinaryTree — the degenerate shape</h2>
+<BinaryTree
+  title="insert 1,2,3,4,5 in order and you get a linked list"
+  caption="Tone a whole path to make a failure mode visible. The same layout that draws a balanced tree as a pyramid draws this one as a diagonal."
+  root={{
+    v: 1,
+    tone: 'red',
+    right: {
+      v: 2,
+      tone: 'red',
+      right: { v: 3, tone: 'red', right: { v: 4, tone: 'red', right: { v: 5, tone: 'red' } } }
+    }
+  }}
+/>
+
+<h2>BinaryTree — level layout with slot indexes</h2>
+<BinaryTree
+  layout="level"
+  showIndex
+  title="the same tree, placed by complete-tree slot"
+  caption="<code>layout=&quot;level&quot;</code> places each node by its position in a complete tree, which lines the drawing up with an array index. Pair it with a <code>Cells</code> row to show one structure in two representations."
+  root={{
+    v: 3,
+    left: { v: 8, left: { v: 21, tone: 'faint' }, right: { v: 10, tone: 'faint' } },
+    right: { v: 5, left: { v: 17, tone: 'faint' }, right: { v: 9, tone: 'faint' } }
+  }}
+/>
+
+<h2>BSTLab — interactive</h2>
+<BSTLab
+  title="the same ten keys, four insertion orders"
+  caption="The movement IS the argument: nothing about the data changes between the presets, only the order it arrives in, and the height readout goes from 3 to 9. A static before/after pair would show the endpoints; stepping shows why."
+/>
+
+<h2>TraversalLab — interactive</h2>
+<TraversalLab
+  title="one tree, four orders"
+  caption="Four traversals as one walk with the visit moved. The bottom row shows the real auxiliary structure — a stack for the depth-first orders, a queue for level order — which is what makes the space comparison concrete."
+/>
+
+<h2>HeapLab — interactive</h2>
+<HeapLab
+  title="a min-heap, as a tree and as the array that stores it"
+  caption="Both views are driven by ONE array, so they cannot disagree — which is the point being taught. Push or pop and step: one element walks one path, lit in both views at once."
 />
 
 <h2>PartitionLab — interactive</h2>

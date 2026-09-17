@@ -90,7 +90,13 @@
   const py = (t: TNode) => PAD + t.depth * GAP_Y + NH / 2;
 </script>
 
-<Figure {title} {caption} {plain} minWidth={W > 700 ? `${Math.round(W / 16)}rem` : ''}>
+<Figure
+  {title}
+  {caption}
+  {plain}
+  minWidth={W > 700 ? `${Math.round(W / 16)}rem` : ''}
+  pinControls
+>
   <svg class="dg" viewBox="0 0 {W} {H}" width={W} height={H} role="img" aria-label={title}>
     {#each flat as node, ni (ni)}
       {#each node.children as child, ci (ci)}

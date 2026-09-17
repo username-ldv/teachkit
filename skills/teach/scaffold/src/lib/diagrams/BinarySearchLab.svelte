@@ -208,9 +208,5 @@
     </span>
   {/snippet}
 
-  {#snippet captionSnippet()}
-    <p style="margin:0">
-      <b>{step.verdict}</b>{caption ? ' — ' : ''}{@html caption}
-    </p>
-  {/snippet}
+  {#snippet status()}{step.verdict}{/snippet}
 </Figure>

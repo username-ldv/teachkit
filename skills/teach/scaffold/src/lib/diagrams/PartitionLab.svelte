@@ -193,7 +193,5 @@
     </span>
   {/snippet}
 
-  {#snippet captionSnippet()}
-    <p style="margin:0"><b>{step.note}</b>{caption ? ' — ' : ''}{@html caption}</p>
-  {/snippet}
+  {#snippet status()}{step.note}{/snippet}
 </Figure>

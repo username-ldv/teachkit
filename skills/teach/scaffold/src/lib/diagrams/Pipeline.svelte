@@ -35,14 +35,51 @@
   const PADX = 18;
   const GAP_MIN = 56;
 
+  /**
+   * The widest a `sub` is allowed to make its box before it wraps instead.
+   *
+   * Without this, a long sub stretches the viewBox far past the column, and
+   * since .figure svg.dg scales the drawing down to fit, EVERY label in the
+   * figure shrinks — the box is wide and the type is unreadable. 260px keeps
+   * every one-line sub in the course (the longest is 33 characters) on its
+   * own line, so this only changes figures that were already too wide.
+   */
+  const SUB_MAX_W = 260;
+  const SUB_SIZE = 11;
+  const SUB_LEADING = 14;
+
   const boxW = (s: Step) =>
     Math.max(
       54,
       (s.mono ? monoWidth(s.label, 13) : sansWidth(s.label, 14)) + PADX * 2,
-      s.sub ? monoWidth(s.sub, 11) + PADX * 2 : 0
+      s.sub ? Math.min(monoWidth(s.sub, SUB_SIZE) + PADX * 2, SUB_MAX_W) : 0
     );
 
   const widths = $derived(steps.map(boxW));
+
+  /** Greedy word wrap to a pixel width, in the sub's own font size. */
+  function wrap(text: string, maxW: number): string[] {
+    const words = text.split(' ');
+    const lines: string[] = [];
+    let line = '';
+    for (const w of words) {
+      const next = line ? `${line} ${w}` : w;
+      if (line && monoWidth(next, SUB_SIZE) > maxW) {
+        lines.push(line);
+        line = w;
+      } else {
+        line = next;
+      }
+    }
+    if (line) lines.push(line);
+    return lines;
+  }
+
+  /** One wrapped sub per step, laid out to that step's box width. */
+  const subLines = $derived(
+    steps.map((s, i) => (s.sub ? wrap(s.sub, widths[i] - 8) : []))
+  );
+  const maxSubLines = $derived(Math.max(0, ...subLines.map((l) => l.length)));
   const gaps = $derived(
     steps.slice(0, -1).map((_, i) => Math.max(GAP_MIN, monoWidth(edges[i] ?? '', 11) + 24))
   );
@@ -57,9 +94,10 @@
     return out;
   });
 
-  const hasSub = $derived(steps.some((s) => s.sub));
   const rowY = PAD + 4;
-  const height = $derived(rowY + h + (hasSub ? 22 : 0) + PAD);
+  const height = $derived(
+    rowY + h + (maxSubLines ? 6 + maxSubLines * SUB_LEADING : 0) + PAD
+  );
   const width = $derived((xs.at(-1) ?? 0) + (widths.at(-1) ?? 0) + PAD);
 </script>
 
@@ -88,11 +126,14 @@
         text-anchor="middle"
         font-size={step.mono ? 13 : 14}>{step.label}</text
       >
-      {#if step.sub}
-        <text class="label" x={xs[i] + widths[i] / 2} y={rowY + h + 17} text-anchor="middle">
-          {step.sub}
-        </text>
-      {/if}
+      {#each subLines[i] as line, li (li)}
+        <text
+          class="label"
+          x={xs[i] + widths[i] / 2}
+          y={rowY + h + 17 + li * SUB_LEADING}
+          text-anchor="middle">{line}</text
+        >
+      {/each}
 
       {#if i < steps.length - 1}
         {@const x1 = xs[i] + widths[i] + 6}

@@ -176,7 +176,5 @@
     <span class="readout">comparisons <b>{step.comps}</b> · writes <b>{step.writes}</b></span>
   {/snippet}
 
-  {#snippet captionSnippet()}
-    <p style="margin:0"><b>{step.note}</b>{caption ? ' — ' : ''}{@html caption}</p>
-  {/snippet}
+  {#snippet status()}{step.note}{/snippet}
 </Figure>
