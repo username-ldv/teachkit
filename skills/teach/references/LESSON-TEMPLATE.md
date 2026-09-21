@@ -88,6 +88,9 @@ function example(xs: number[]): number {
   <p>Name the misconception explicitly, then say why it is wrong.</p>
 </Callout>
 
+<!-- `answer` is an identity, not a position: <Question> reshuffles its options
+     on every page load, so write the index the true statement happens to be at.
+     Never say "the third option" in an explain snippet — name what it says. -->
 <Quiz>
   <Question
     q="…?"

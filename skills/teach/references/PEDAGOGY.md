@@ -93,6 +93,21 @@ lesson 4 having never been introduced — the memory model got taught by using i
 - **3–4 checkpoints per lesson**, placed after the section they test, not all at the end.
 - **Options equal length.** Equal word count, and equal character count if it can be managed. A
   longer option is a tell, and a tell turns retrieval into pattern-matching.
+- **Position is the component's job, not yours — but the explanation is yours.** You draft a
+  question by writing the true statement and then inventing distractors around it, so `answer={0}`
+  is where every question lands and nothing later moves it: the Go course shipped **52 of 52** that
+  way across five lessons before the learner noticed and said so, and two sibling courses were 100%
+  and 93% option one. `<Question>` now **reshuffles its options on every page load**, so write
+  `answer` wherever the true statement fell and leave it — it is an identity, not a position.
+  Two things the shuffle cannot do for you:
+  - **Never name an option by where it sits.** "The third option describes a domain restriction" is
+    wrong the moment the order changes. Name it by what it says: "_the answer about negative y_
+    describes a domain restriction". Twenty-four explanations across four courses had to be
+    rewritten when the shuffle landed.
+  - **Options that only work in a fixed order** — "all of the above", a sequence meant to be read
+    in order — need `shuffle={false}` on that question.
+
+  `scaffold/tools/check-quizzes.mjs` (`npm run check:quizzes`) checks both, plus the length tell.
 - **No formatting clues.** Same typography in every option.
 - **Retry until correct.** Wrong answers are struck through and stay visible; the effort is the
   point.

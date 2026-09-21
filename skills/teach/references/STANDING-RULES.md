@@ -76,6 +76,16 @@ black box with a one-line "lesson N covers this".
 by using its vocabulary. And watch for one word naming two things: "heap" is also the priority queue
 in a later lesson. Both places must say which.
 
+A figure's labels, columns, status line and caption count as terms on the page, and "before
+shipping" is not the test — **before the figure is reached** is. This has cost two repairs in one
+course. `FloatLab` printed *bias*, *exponent field* and *fraction* in lesson 2 §9 where the prose
+introduced none of them. `StringLab` sat in lesson 3 §1 printing a *code point* row (`U+00E9 · 233`)
+above a *bytes (hex)* row (`C3 A9`), and the prose that says those are different kinds of number did
+not arrive until §5; the learner hit the collision in §3 and reported, exactly, that "the
+explanations seem a little bit out of order." When a figure shows two quantities side by side, the
+prose above it owes the reader what each one is **and how they differ** — a definition later in the
+same lesson is too late. A term that a `.ts` model names is a teaching commitment.
+
 **13. A label in a diagram means exactly what the same identifier means in the code on that page.**
 A ring-buffer figure labelled the newest element `tail` while the code computed `tail` as the next
 free slot. The learner read the diagram correctly, applied it to the prose, and concluded the lesson
@@ -149,7 +159,9 @@ still wobbles after that, the explanation is the problem.
 ## Process
 
 **26. Verify exercise specs by solving them.** Reference solutions in, suite green, type-check
-separately (Vitest transpiles without typechecking), formatter and linter clean, stubs restored.
+separately (Vitest transpiles without typechecking), formatter and linter clean, stubs restored —
+and **time the stub run**. The learner's first run of every exercise is the stub run, and a green
+suite says nothing about it, because the expensive paths are the failing ones. See rule 38.
 
 **27. Never write a backslash or a `$` through a shell command.** Use the file-editing tools. A
 heredoc eats them — `'\vdots'` arrives as a vertical tab and renders as nothing — and so does a
@@ -217,3 +229,14 @@ A faithful port means the prose and the code survive — it does not mean carryi
 contract forward, and it certainly does not mean writing that weakness into the new workspace's
 rules as though it were a decision. Port the content, then say plainly which parts of the current
 standard the ported course does not meet, and offer to remake them.
+
+**38. A failing assertion must be cheap. Never `toEqual` a large array.**
+An exercise was reported as "even though I haven't written anything, it never ends". Nothing looped:
+the stubs took 4m37s to go red because two assertions compared 100,000-element arrays, and Vitest
+prints one line per element and then diffs the two sides line by line — quadratic, 76 seconds per
+failure, and paid only when the learner is wrong. Assert the property with an O(n) scan that names
+one index, print the whole array only while it is short enough to read, and set
+`test.diff.truncateThreshold` (default `0` = no cap; the CLI flag is swallowed when `test.projects`
+is used) as the net for everything you did not think of. Go's `slices.IsSorted` + `slices.Equal`
+helper had been doing it right in the same exercise, which is also rule 26's argument for diffing
+the two tracks against each other.

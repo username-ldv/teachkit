@@ -87,8 +87,15 @@ Layout that works:
 on one exercise at a time:
 
 - TypeScript / Vitest: `describe.skip` plus a three-line header telling them to remove it.
-- Go: a `//go:build lessonNN` tag plus the same instruction. `go test ./...` then reports
-  "[no test files]" for gated packages rather than failing.
+- Go: **one build tag per exercise**, `//go:build lessonNN_E || lessonNN`, and nothing to delete —
+  `go test -tags lessonNN_E ./path` runs exactly that exercise, the `|| lessonNN` umbrella runs the
+  whole lesson, and a plain `go test ./...` reports "[no test files]". Print the commands in the
+  file's own header. Tags take letters, digits, `_` and `.` only: a hyphen is a parse error that
+  fails the whole package. Never ship an instruction to edit a file in order to run it — find the
+  flag.
+
+  Two compile checks, both needed: every tag alone (nothing undefined — so each test file must define
+  every helper it uses) and the umbrella (nothing defined twice).
 
 Ship the *whole batch* gated, not just the later lessons — three lessons arrive at once and the
 learner enables them individually, in whichever language they pick that day.

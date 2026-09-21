@@ -122,6 +122,9 @@ propagated into reference sheets, glossary entries and exercise stubs.
 - `<Playground>` — where the exercises live for this lesson.
 - `<NumericQuestion expected={…} tolerance={…} hint="…" correct="…">` — a checkpoint whose answer
   is a number, checked live. The right shape whenever the retrieval is arithmetic.
+- `<Question … shuffle={false}>` — freeze the option order. `<Question>` otherwise reshuffles on
+  every page load, which is what stops `answer={0}` becoming a pattern; freeze it only when the
+  options have to be read in the order written ("all of the above", a numbered sequence).
 - `<RepoRef path="…" line={…}>` — cite a real file in the learner's own codebase.
 - Wrap every `<table>` in `<div class="table-wrap">` so a wide one scrolls inside its own box
   instead of pushing the page sideways.

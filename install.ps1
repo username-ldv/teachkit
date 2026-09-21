@@ -18,6 +18,13 @@
   Put a real copy in every target instead of linking the others to ~/.agents.
   Use this if an agent turns out not to follow a symlinked skill directory.
 
+.PARAMETER Link
+  Link the canonical home at this repository instead of copying into it, so
+  that editing an installed skill edits the repo and the two cannot drift.
+  They did drift, badly, between 4 and 21 Sep 2026: the copy was edited in
+  place for seventeen days while the repo took its own commits, and putting
+  them back together was a three-way merge. Re-run with -Link after pulling.
+
 .EXAMPLE
   powershell -ExecutionPolicy Bypass -File install.ps1
   powershell -ExecutionPolicy Bypass -File install.ps1 -Targets claude,codex
@@ -27,10 +34,13 @@
 param(
   [string[]] $Targets,
   [switch] $List,
-  [switch] $Copy
+  [switch] $Copy,
+  [switch] $Link
 )
 
 $ErrorActionPreference = 'Stop'
+
+if ($Copy -and $Link) { throw '-Copy and -Link are opposites; pass one or neither.' }
 
 $repo = Split-Path -Parent $MyInvocation.MyCommand.Path
 $source = Join-Path $repo 'skills'
@@ -67,19 +77,53 @@ if ($Targets) {
 $canonical = if ($chosen -contains 'agents') { 'agents' } else { $null }
 if ($canonical) { $chosen = @($canonical) + ($chosen | Where-Object { $_ -ne $canonical }) }
 
+# Remove a skill that may itself be a link, deleting the link and never what
+# it points at. Remove-Item -Recurse -Force was measured on 2026-09-21 doing
+# the right thing for both junctions and symlinks on Windows PowerShell
+# 5.1.26100 and 7 — but it has followed directory links on older builds, and
+# with -Link in use the thing it would follow into is this repository.
+function Remove-SkillPath([string] $path) {
+  $item = Get-Item -LiteralPath $path -Force -ErrorAction Ignore
+  if (-not $item) { return }
+  if ($item.Attributes -band [IO.FileAttributes]::ReparsePoint) {
+    try { [IO.Directory]::Delete($item.FullName, $false) }
+    catch { [IO.File]::Delete($item.FullName) }
+    return
+  }
+  Remove-Item -Recurse -Force -LiteralPath $path
+}
+
 foreach ($name in $chosen) {
   $dest = $homes[$name].Skills
   if ($List) {
-    $how = if ($canonical -and $name -ne $canonical -and -not $Copy) { 'link' } else { 'copy' }
+    $how = if ($Link -and $canonical -and $name -eq $canonical) { 'link -> repo' }
+           elseif ($canonical -and $name -ne $canonical -and -not $Copy) { 'link' }
+           else { 'copy' }
     Write-Host "$name -> $dest ($how)"
     continue
   }
   if (-not (Test-Path $dest)) { New-Item -ItemType Directory -Path $dest -Force | Out-Null }
   foreach ($skill in $skills) {
     $to = Join-Path $dest $skill
-    # Test-Path follows links, so a broken symlink needs the item itself.
-    if ((Test-Path $to) -or (Get-Item $to -Force -ErrorAction Ignore)) {
-      Remove-Item -Recurse -Force $to
+    Remove-SkillPath $to
+
+    # -Link points the canonical home at the repo; every other home still
+    # links to the canonical one, so all of them end up at the same files.
+    if ($Link -and $canonical -and $name -eq $canonical) {
+      $target = Join-Path $source $skill
+      try {
+        New-Item -ItemType SymbolicLink -Path $to -Target $target -ErrorAction Stop | Out-Null
+        Write-Host "linked    $skill -> $to (-> repo)"
+        continue
+      } catch {
+        try {
+          New-Item -ItemType Junction -Path $to -Target $target -ErrorAction Stop | Out-Null
+          Write-Host "junctioned $skill -> $to (-> repo)"
+          continue
+        } catch {
+          Write-Warning "could not link $to ($($_.Exception.Message)); copying instead"
+        }
+      }
     }
 
     if ($canonical -and $name -ne $canonical -and -not $Copy) {

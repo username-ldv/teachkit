@@ -178,6 +178,7 @@ pages are built*.
 | `npm run dev` | the course, with hot reload |
 | `npm run check` | TypeScript + Svelte diagnostics for `src/lib` |
 | `npm run check:pages` | crawls every route and asserts nothing is broken |
+| `npm run check:quizzes` | checks quiz explanations survive the option shuffle |
 | `npm run build` | compiles and prerenders every page — the real gate before shipping |
 | `npm run fix:tex` | repairs under-escaped backslashes in `<Derivation>` / `<Math>` props |
 

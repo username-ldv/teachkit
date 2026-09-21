@@ -19,6 +19,13 @@ Run the whole list. It is not long, and skipping the boring half is how the bori
 - [ ] **`npm run fix:tex`** if any `<Derivation>` or `<Math>` was touched.
 - [ ] **Exercise suites**: reference solutions in, all green, type-check separately, formatter and
       linter clean, stubs restored, failing for the right reason. See [EXERCISES.md](EXERCISES.md).
+- [ ] **Run the solution that is *on the page*, not the one you wrote while authoring.** Extract every
+      `<CodeBlock>` inside a `<Solution kind="solution">`, paste it into the exercise repo, run the
+      shipped tests. These two artefacts drift: L9 ex 2 and 3 shipped solutions carrying the previous
+      lesson's `Counters` parameter — which the stubs no longer had — and an ungated `TopK` that
+      panicked on the empty array the shipped test feeds it at n = 0. Both tracks, both exercises. The
+      learner found it by following the page exactly. "The reference solution passed" is only true of
+      text that was compiled and run.
 
 ## Content
 
@@ -38,6 +45,10 @@ Run the whole list. It is not long, and skipping the boring half is how the bori
       outright, or measured by code you ran.
 - [ ] **No "≈", "clearly", "obviously"** carrying real weight, and no "there are exactly N ways".
 - [ ] **Quiz options are equal length** and give nothing away by formatting.
+- [ ] **`npm run check:quizzes` is green.** `<Question>` shuffles its options on every load, so
+      `answer` needs no thought — but an explanation that says "the third option" is now wrong, and
+      an "all of the above" needs `shuffle={false}`. The lint catches both, and warns when the
+      correct option is markedly the longest.
 - [ ] **`<Recall>` draws only from earlier lessons.**
 - [ ] **Promises made in "What's next" are recorded in `NOTES.md`.**
 

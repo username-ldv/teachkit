@@ -74,6 +74,12 @@ as* their own home, so a real copy in each one appears as the same skill twice i
 `.agents` is among the targets it gets the real copy and the others are symlinked to it. If an agent
 turns out not to follow a symlinked skill directory, re-run with `-Copy` / `--copy` and tell us.
 
+**Working on the skills themselves? Install with `-Link`.** That points the canonical home at this
+checkout instead of copying into it, so editing an installed skill edits the repo and the two
+cannot drift. They did drift once, and badly: the copy was edited in place for seventeen days
+while the repo took its own commits, and putting the two back together was a three-way merge over
+38 files. Without `-Link`, re-run the installer after every change you want the agent to see.
+
 Or copy by hand — the skills are plain directories with a `SKILL.md` inside, and every agent that
 supports skills looks in one of these:
 
