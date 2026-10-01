@@ -142,7 +142,10 @@ Then, in order:
    `RecursionTree`, `GrowthChart`) are DSA-specific — read them for the interaction patterns, then
    delete the ones you will not use. Do not delete the core primitives; they are cheap and the third
    lesson will want them.
-7. **`git init`** and commit the scaffold before the first lesson, so the first batch has a diff.
+7. **`tools/check-exercise-refs.mjs`**: set `TEST_ROOTS` to where each lesson's Go tests live, as soon
+   as the practice repo exists. It only acts on pages that name tests, so a course without Go tests can
+   leave it alone.
+8. **`git init`** and commit the scaffold before the first lesson, so the first batch has a diff.
 
 Verify the empty course before writing a word of content: `npm run build` and `npm run check` must
 both be clean.
@@ -179,6 +182,7 @@ pages are built*.
 | `npm run check` | TypeScript + Svelte diagnostics for `src/lib` |
 | `npm run check:pages` | crawls every route and asserts nothing is broken |
 | `npm run check:quizzes` | checks quiz explanations survive the option shuffle |
+| `npm run check:exercises` | every test a page names exists; every `-run` pattern matches one |
 | `npm run build` | compiles and prerenders every page — the real gate before shipping |
 | `npm run fix:tex` | repairs under-escaped backslashes in `<Derivation>` / `<Math>` props |
 

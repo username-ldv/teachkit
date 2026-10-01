@@ -110,6 +110,9 @@ function example(xs: number[]): number {
 <Exercise n={1} title="Build the thing" tags="the core structure · ~30 min">
   <p>What to build, and the <strong>invariant</strong> it must hold: after X runs, the structure
   holds exactly Y.</p>
+  <p><strong>Where the method is.</strong> The sections of this page that teach every technique the
+  exercise needs, worked there on a different problem. If a technique is only in a hint below, it is
+  not taught yet.</p>
   <ol class="steps">
     <li>Step, with the expected observable outcome stated.</li>
   </ol>

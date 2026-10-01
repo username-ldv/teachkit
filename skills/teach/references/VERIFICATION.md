@@ -19,6 +19,14 @@ Run the whole list. It is not long, and skipping the boring half is how the bori
 - [ ] **`npm run fix:tex`** if any `<Derivation>` or `<Math>` was touched.
 - [ ] **Exercise suites**: reference solutions in, all green, type-check separately, formatter and
       linter clean, stubs restored, failing for the right reason. See [EXERCISES.md](EXERCISES.md).
+- [ ] **`npm run check:exercises`**: every `Test…` a page names exists in that lesson's test files,
+      and every `-run` pattern the page prints matches at least one test. Set `TEST_ROOTS` in
+      `tools/check-exercise-refs.mjs` once, when the practice repo is created.
+- [ ] **Read which tests pass on the untouched stub.** Each one is deliberate and the page says so, or
+      it is a defect (STANDING-RULES 41).
+- [ ] **Mutate for every claim about code.** Every "X would pass/fail Y" or "X looks equivalent and is
+      not" in a hint, worked solution or test comment, and every test written to catch one specific
+      mistake: swap the line into the reference solution and run the real suite (STANDING-RULES 40).
 - [ ] **Run the solution that is *on the page*, not the one you wrote while authoring.** Extract every
       `<CodeBlock>` inside a `<Solution kind="solution">`, paste it into the exercise repo, run the
       shipped tests. These two artefacts drift: L9 ex 2 and 3 shipped solutions carrying the previous
@@ -35,6 +43,10 @@ Run the whole list. It is not long, and skipping the boring half is how the bori
       in `GLOSSARY.md`. Watch for a word that names two different things in the same course.
 - [ ] **Label-vs-code pass.** Every identifier in a figure means exactly what the same identifier
       means in the code on that page. Read the figures against the code, not from memory.
+- [ ] **Method pass.** For each exercise, search the page *outside* its `<Exercise>` block for its
+      central operation and for every constant, case and term its worked solution and tests name. If
+      it is only in a hint, teach it in the body (STANDING-RULES 39). When this rule is new to a
+      course, run it on the lessons already shipped too.
 - [ ] **Sequencing pass.** Nothing is used, quizzed, or relied on that has not been taught earlier in
       this course — *including in example code*. A concept the mission defers must not appear
       unflagged.

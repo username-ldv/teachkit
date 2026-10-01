@@ -60,6 +60,18 @@ loop that called `indexFor` before swapping in the new buckets passed 10 of 12 t
 **Name units and kinds in every parameter.** Duration or instant, count or index. This has cost an
 entire exercise's intelligibility once.
 
+**Teach the method in the body; practise it here.** An exercise may only ask for techniques the lesson
+body teaches, and the body should teach them on a *different* problem so the exercise is transfer.
+Open each exercise with a one-line **"Where the method is"** that names the sections. A hint may
+remind or shortcut; it may not be the only place a technique appears. One course broke this four
+times in five days (STANDING-RULES 39), and every time the method was living in a hint.
+
+**The stub is specification, so copy it from the tests.** Examples, ranges and counts in a stub's
+doc comments come from the test table, not from memory. One stub contradicted its own tests, and
+the learner trusts the file they are editing (STANDING-RULES 42). No test may lean on another function
+the learner has not written yet: build fixtures from local variables, not from the stub's own
+constructors, or the test passes on the stub (STANDING-RULES 41).
+
 **Progressive hints in `<Solution kind="hint">`,** then a worked solution. The worked solution must
 compile against the stub as given — a solution using `int64` where the stub used `int` could never
 have run.
@@ -120,6 +132,17 @@ A broken spec costs the learner an hour and their trust in the whole suite.
 4. Run the repo's formatter and linter (`gofmt -l`, `go vet`, `npx oxfmt`, `npx oxlint`, whatever it
    uses).
 5. **Restore the stubs** and re-run to confirm they fail for the right reason.
+6. **Read which tests pass on the stub.** Each one is either deliberate, and the page says so, or a
+   defect: a test leaning on an unwritten function, or a stub that shipped with the solution in it
+   (STANDING-RULES 41). Take "N tests fail" and "watch N go green" from this run, never from memory.
+7. **Mutate for every claim.** A test written to catch a specific mistake, and every sentence in a
+   hint, worked solution or test comment that says "X would pass/fail Y" or "X looks equivalent and
+   is not": swap that one line into the reference solution and run the real suite (STANDING-RULES
+   40). Two such sentences in one lesson were false, and one test could not fail at all.
+8. **`npm run check:exercises`**: every test the page names exists, and every `-run` pattern the
+   page prints matches at least one test.
+9. **Run every command the steps print** and compare the output with what the step promises
+   ("`-v` prints the board after each move").
 
 This process has caught real bugs, including a test that counted two initialisation reads as part of
 a single-pass assertion.

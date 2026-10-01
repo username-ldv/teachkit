@@ -147,6 +147,12 @@ A wrong claim propagates into reference sheets, glossary entries, exercise stubs
 marked CORRECTION callout is better than a silent patch — the learner may have already built on the
 wrong version.
 
+The same grep applies to a *correct* change. A repair switched a Go lesson's copy idiom from
+`append([]int(nil), cur...)` to the plainer-looking `append([]int{}, cur...)`. Two lessons later, a
+section explains `append([]int(nil), cur...)` "as arithmetic", cites it by name five times, and quotes
+the earlier lesson's wording. The switch was reverted, and the earlier lesson now teaches the original
+idiom. Before changing anything a later lesson might build on, grep the later lessons for it.
+
 **24. Never edit the learner's in-progress code.**
 Corrections go in chat, or in a doc comment only. They finished that exercise; the file is theirs.
 
@@ -201,6 +207,13 @@ exactly why Go's `slices.Sort` promises nothing about it. The fix was not a clev
 was a small record type carrying a field the comparator never reads — plus a comment in the spec
 saying why that type exists. A test that cannot fail teaches nothing.
 
+It can also teach something false. A Go suite compared `&xs[0]` before and after four in-place
+functions, "to prove the backing array never moved". A function receives a *copy* of the caller's slice
+header and cannot move the caller's slice at all, so the test could not fail. A `Reverse` that built a
+new slice failed the real tests and passed that one. Worse, the test told the learner the array *could*
+move. **Any test written to catch a specific mistake gets that mistake written and run against it**
+(rule 40); if it passes, the test is decoration.
+
 **33. If the lesson teaches a failure mode, the exercise should reproduce it, asserted.**
 Reading "quicksort is O(n²) in the worst case" and watching your own function make exactly 499,500
 comparisons on 1,000 already-sorted numbers are different experiences. Ask for the naive version
@@ -240,3 +253,65 @@ one index, print the whole array only while it is short enough to read, and set
 is used) as the net for everything you did not think of. Go's `slices.IsSorted` + `slices.Equal`
 helper had been doing it right in the same exercise, which is also rule 26's argument for diffing
 the two tracks against each other.
+
+---
+
+## Exercises and their specs
+
+**39. A method an exercise needs is taught in the lesson body. A hint may not be its only home.**
+One Go course broke this four times in five days, and each time the learner's report was precise.
+Digit peeling (`x % 10`, `x / 10`) appeared nowhere in the lesson except inside the exercise's own
+hint: "I didn't find a place in the lesson that could give me an idea". A UTF-8 decoder's worked
+solution and tests relied on the byte range `F8`–`FF`, which the lesson's table silently left out.
+A recursion exercise asked for Hanoi, subsets, permutations and combinations from a section that had
+taught only stack depth: "I don't know what is `Hanoi`". An allocation exercise required
+`strconv.AppendInt`, which no lesson showed; with the tools the lesson *had* taught, the function
+measured 38 allocations against a budget of 4.
+
+The check before shipping: for each exercise, search the page *outside* its `<Exercise>` block for
+the exercise's central operation, and for every constant, case and term that its worked solution and
+its tests name. Teach the method on a *different* problem, so that the exercise is transfer rather
+than copying, and give each exercise a one-line "Where the method is" that names the sections. When a
+rule like this is written, audit the lessons written before it. The recursion exercise predated this
+rule by five days and broke it on every function.
+
+**40. A sentence about what code does is a claim about a program: run it.**
+"X looks equivalent and is not." "Y would pass this test and fail that one." "Missing the pop gives
+the right count." Each describes code, so each is settled by running that code. A worked solution
+said that comparing with `xs[read-1]` in an in-place de-duplication "looks equivalent and is not".
+That version passes the whole suite and agreed with the reference on 1,006,188 sorted inputs. The trap
+is real only one step further on, in "keep at most two copies". The same lesson said
+`bytes.Clone(buf)[:n]` passes a retention test and merely wastes memory. It fails both tests, because
+the 16-byte result keeps the whole 64 MiB clone alive.
+
+Rule 3 already says to produce a failure before describing it. This is rule 3 for worked solutions,
+hints, test comments and test failure messages, where it was not being applied. The tool is a
+mutation: swap one line of the reference solution, run the real suite, and read what it says.
+
+**41. Run the stub's suite and read which tests pass.**
+Every test that passes on an untouched stub is either deliberate, and then the page says so ("this
+one needs no change; work out why"), or a defect. Doing this once found two. A `Coalesce` test passed
+because it built its pointers with the stub's `Of`, which returned nil. A test must never lean on
+another function the learner has not written yet. And a `FirstLines` stub shipped *fully implemented*
+under a `// TODO` while the page asked the learner to write it. The stub run is also where "six tests
+fail" and "watch three go green" come from. Count them, do not estimate: one page said six where it
+was three.
+
+**42. The page, the stub and the tests are three copies of one specification. Make them agree by
+checking, not by care.**
+
+- **A stub's doc-comment examples are copied from the test table, never typed.** A recursion stub
+  said `Subsets([]int{1, 2})` is `[[] [1] [2] [1 2]]`; the tests and the page wanted
+  `[[] [2] [1] [1 2]]`. A learner obeying the file they were editing would have failed a test for it.
+- **A test the page names exists, and a `-run` pattern it prints matches something.**
+  `npm run check:exercises` (`scaffold/tools/check-exercise-refs.mjs`) checks both against the
+  lesson's test files. Its first runs found five test names that had never existed, across two
+  lessons. They also found `-run 'TestBinarySearch$'`, which matched no test (the tests were
+  `TestBinarySearchExhaustive` and two siblings), so `go test` printed `[no tests to run]` and exited
+  0. That example sat in the very paragraph warning about that trap.
+- **Every step that promises output is run and read.** "Re-run with `-v`: it prints the board after
+  each move": the test logged nothing. "Two of the 'escapes to heap' lines should be gone": the stub
+  printed none to begin with.
+- **Invariants state what the tests check, over the ranges they check.** "Checked for every size up
+  to 10" was 8 for one of the four functions; "compared on 20,000 generated inputs" was true of one
+  function in five.

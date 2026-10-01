@@ -129,4 +129,7 @@ for (const { path, hash, from } of wanted) {
 console.log(
   failed ? `\n${failed} problem(s) across ${pages.size} pages` : `\nall ${pages.size} pages clean`
 );
-process.exit(failed ? 1 : 0);
+// exitCode, not process.exit(): exiting while a fetch socket was still closing
+// tripped a libuv assertion on Windows and exited 127 after a clean crawl,
+// every time, on the scaffold. Letting the loop drain exits 0 or 1 as meant.
+process.exitCode = failed ? 1 : 0;

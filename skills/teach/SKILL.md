@@ -128,17 +128,20 @@ course produces. Handle it in this order:
 ## Non-negotiables
 
 The long version, with the incident behind each one, is in
-[STANDING-RULES.md](references/STANDING-RULES.md). Read it before writing a batch. The five that
+[STANDING-RULES.md](references/STANDING-RULES.md). Read it before writing a batch. The six that
 have cost the most:
 
 - **Verify every primary source by fetching it.** Recognising a URL pattern is not verification.
 - **Never assert behaviour from parametric memory.** If the docs do not say it outright, read the
   source or run it.
 - **A correct conclusion does not license an unverified explanation of why.** Produce the failure
-  before writing the sentence that describes it.
+  before writing the sentence that describes it, and that includes hints and worked solutions:
+  "this would fail that test" is settled by running it.
 - **Grep new pages for terms of art.** Every one must be defined on the page or already in
   `GLOSSARY.md`.
 - **A label in a diagram must mean exactly what the same identifier means in the code on that page.**
+- **An exercise practises only what the lesson body taught.** Search the body, not the hints, for
+  each exercise's method before shipping.
 
 ## Reference index
 

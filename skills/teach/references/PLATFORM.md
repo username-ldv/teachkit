@@ -16,6 +16,7 @@ npm run dev          # http://127.0.0.1:8321 — this is how lessons are read
 | `npm run check` | TypeScript + Svelte diagnostics for `src/lib` |
 | `npm run check:pages` | crawls every route from the running server and asserts nothing is broken |
 | `npm run check:quizzes` | reads the lesson source and checks the quiz tells the shuffle cannot fix |
+| `npm run check:exercises` | every `Test…` a page names exists, and every `-run` pattern it prints matches a test |
 | `npm run build` | compiles and prerenders every page — **the real gate before shipping** |
 | `npm run fix:tex` | repairs under-escaped backslashes in `<Derivation>` / `<Math>` props |
 
