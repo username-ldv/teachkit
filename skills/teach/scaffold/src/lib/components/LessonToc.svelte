@@ -1,10 +1,15 @@
 <script lang="ts">
+  import LessonRail from './LessonRail.svelte';
+
   /**
    * "In this lesson".
    *
    * Items are the raw inner HTML of each list entry, not just a label, because
    * some entries carry more than one link ("The call stack · and the heap").
    * Wrapping a plain label in an <a> here would nest anchors in those cases.
+   *
+   * The same items feed LessonRail, the buttons in the margin that open a
+   * floating copy of this list from anywhere on the page.
    */
   let { items }: { items: string[] } = $props();
 </script>
@@ -18,3 +23,5 @@
     {/each}
   </ol>
 </nav>
+
+<LessonRail {items} />

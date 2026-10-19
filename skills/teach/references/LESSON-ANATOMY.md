@@ -22,7 +22,9 @@ it before anyone else did.
 current one; that is what the checkpoints are for.
 
 **4. `<LessonToc>`** — one entry per `<h2>`, matching the `id`s exactly. Entries are raw inner HTML,
-so an entry may carry markup or a second link.
+so an entry may carry markup or a second link. The same entries feed `LessonRail`, the buttons in
+the right margin (top, a floating copy of this list, exercises, end): its exercises button appears
+only when an entry links `#exercises`.
 
 **5. The body** — numbered `<h2 id="…">` sections. Ten to fourteen is normal for a 30-minute lesson.
 The arc that works:
