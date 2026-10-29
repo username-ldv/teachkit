@@ -16,7 +16,6 @@ npm run dev          # http://127.0.0.1:8321 — this is how lessons are read
 | `npm run check` | TypeScript + Svelte diagnostics for `src/lib` |
 | `npm run check:pages` | crawls every route from the running server and asserts nothing is broken |
 | `npm run check:quizzes` | reads the lesson source and checks the quiz tells the shuffle cannot fix |
-| `npm run check:exercises` | every `Test…` a page names exists, and every `-run` pattern it prints matches a test |
 | `npm run build` | compiles and prerenders every page — **the real gate before shipping** |
 | `npm run fix:tex` | repairs under-escaped backslashes in `<Derivation>` / `<Math>` props |
 
@@ -29,6 +28,20 @@ valid Svelte after the preprocessor runs, and `svelte-check` reports diagnostics
 *original* text — so it sees `i < len(nums)` as a broken tag. `npm run build` compiles them
 properly, and `check:pages` covers them at runtime. The reasoning is written out in `tsconfig.json`;
 do not "fix" it by removing the exclusions.
+
+### Course-local checks
+
+The scaffold ships only the checks every course needs. A check that concerns one course — its
+language, its practice repo, its labs — is written in that course's `tools/`, given an `npm run`
+script, and listed in the course's `AGENTS.md`, where every later session will find and run it. It
+does not go back into the scaffold unless every course would need it.
+
+Courses have needed, among others: a check that every test name a page cites exists in the
+practice repo and every single-test command it prints matches one (STANDING-RULES 42); a sync that
+keeps worked-solution code blocks byte-identical to the reference solutions that passed the suites;
+and a differential test of a lab's model against the real tool (a compiler, a library, a device
+recording). After every defect found by eye, ask whether a check could catch its whole class
+(STANDING-RULES 34).
 
 ---
 

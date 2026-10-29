@@ -13,13 +13,15 @@ npm run dev          # http://127.0.0.1:8321
 | `npm run check` | TypeScript + Svelte diagnostics for `src/lib` |
 | `npm run check:pages` | crawls every route from the running server and asserts nothing is broken |
 | `npm run check:quizzes` | reads the lesson source and checks the quiz tells the shuffle cannot fix |
-| `npm run check:exercises` | every `Test…` a page names exists, and every `-run` pattern it prints matches a test |
 | `npm run build` | compiles and prerenders every page into `dist/` |
 | `npm run preview` | serves that build |
 | `npm run fix:tex` | repairs under-escaped backslashes in `<Derivation>` / `<Math>` props |
 
 `/dev/diagrams` is a live gallery of every figure component.
 
+Checks written for this course alone (its language, its practice repo, its labs) live in
+`tools/` beside these, and `AGENTS.md` lists them.
+
 The course is taught by an agent: run `/teach` in this directory to continue it, ask for the next
-batch, or report a lesson that did not land. `AGENTS.md` holds this workspace's authoring rules;
+lesson, or report a lesson that did not land. `AGENTS.md` holds this workspace's authoring rules;
 `NOTES.md` holds how this course is meant to be taught.

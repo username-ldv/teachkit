@@ -19,9 +19,10 @@ Run the whole list. It is not long, and skipping the boring half is how the bori
 - [ ] **`npm run fix:tex`** if any `<Derivation>` or `<Math>` was touched.
 - [ ] **Exercise suites**: reference solutions in, all green, type-check separately, formatter and
       linter clean, stubs restored, failing for the right reason. See [EXERCISES.md](EXERCISES.md).
-- [ ] **`npm run check:exercises`**: every `Test…` a page names exists in that lesson's test files,
-      and every `-run` pattern the page prints matches at least one test. Set `TEST_ROOTS` in
-      `tools/check-exercise-refs.mjs` once, when the practice repo is created.
+- [ ] **The course's own checks**, every one listed in its `AGENTS.md` — the ones written for this
+      course's language, practice repo or labs (see [PLATFORM.md](PLATFORM.md#course-local-checks)).
+      Every test name a page cites exists, and every command it prints to run one test matches
+      at least one test (STANDING-RULES 42): if the course has no check for that yet, write it.
 - [ ] **Read which tests pass on the untouched stub.** Each one is deliberate and the page says so, or
       it is a defect (STANDING-RULES 41).
 - [ ] **Mutate for every claim about code.** Every "X would pass/fail Y" or "X looks equivalent and is
@@ -50,9 +51,9 @@ Run the whole list. It is not long, and skipping the boring half is how the bori
 - [ ] **Sequencing pass.** Nothing is used, quizzed, or relied on that has not been taught earlier in
       this course — *including in example code*. A concept the mission defers must not appear
       unflagged.
-- [ ] **Consistency pass across the batch.** Two exercises in one lesson must not give opposite
-      advice about the same-looking operation without the lesson naming the distinguishing
-      principle. Check the batch against the lessons before it too.
+- [ ] **Consistency pass.** Two exercises in one lesson must not give opposite advice about the
+      same-looking operation without the lesson naming the distinguishing principle. Check the new
+      lesson against the lessons before it too.
 - [ ] **Every claim about behaviour, cost or memory** is either cited to a source that states it
       outright, or measured by code you ran.
 - [ ] **No "≈", "clearly", "obviously"** carrying real weight, and no "there are exactly N ways".
@@ -76,10 +77,39 @@ Run the whole list. It is not long, and skipping the boring half is how the bori
       inside their own box rather than pushing the page. Desktop width only — the learner reads on a
       PC, and a phone-width pass once cost a whole verification round on a screen nobody uses.
 
+## Independent review (optional)
+
+Run this when `NOTES.md` or `references/LOCAL.md` says the learner wants it. If neither records a
+choice, ask once, before the first lesson it would apply to: say that it adds a long read's worth of
+tokens to every lesson and what it has found. Record the answer in `NOTES.md` either way.
+
+Every check above is one the author thought of, and the author cannot read the page as a newcomer.
+A second reader can. In a C course, a fresh agent given only the pages and the practice repo found
+28 problems across three lessons that every check in the course's kit had passed: rules stated by
+a simplification that happens to agree on one machine, half-stated rules ("the bitwise operators
+bind looser than comparison" — the shifts do not), and syntax used before it was taught. In an
+Android course, three lessons yielded 34: a citation to a section that never printed the name it
+was cited for, checkpoints answered by the measurement printed just above them, and a quiz that
+claimed a fix which, once compiled, did not work.
+
+- **Give the reviewer nothing from the authoring session** — a fresh agent, a subagent, or a new
+  session, whichever the environment offers. It gets the new pages and the lessons before them,
+  the exercise files, and the baseline in `MISSION.md`. A reviewer who has seen the plan reads the
+  plan, not the page.
+- **Ask it to read in order, as the learner will,** and to report everything it would have had to
+  stop on: a term not yet taught, a skipped step, a claim it doubts, a checkpoint it could answer by
+  finding one sentence, an exercise it could not start from the lesson body alone.
+- **Re-measure every checkable finding before fixing it.** The reviewer can be wrong too. A finding
+  about behaviour is settled like any other claim, by a source or by running it.
+- **Turn each kind of finding into a check or a rule.** A finding fixed once comes back in the next
+  lesson; a finding that became a grep does not. Record the kinds in `NOTES.md`, and in
+  [STANDING-RULES.md](STANDING-RULES.md) if one generalises.
+- **Report it**: how many findings, of which kinds, and what changed because of them.
+
 ## Bookkeeping
 
 - [ ] `src/lib/course.ts` — new lessons added, roadmap updated.
-- [ ] `NOTES.md` — what was delivered, what was promised, any new rule this batch produced.
+- [ ] `NOTES.md` — what was delivered, what was promised, any new rule this lesson produced.
 - [ ] `learning-records/` — only if the *learner* demonstrated something. Not because lessons exist.
 - [ ] `GLOSSARY.md` — only terms they have used correctly.
 - [ ] `RESOURCES.md` — any new source, annotated with when to reach for it.

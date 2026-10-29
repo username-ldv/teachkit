@@ -20,7 +20,7 @@ be remade.
 State reading time and exercise time separately in the manifest, and state both conservatively. A
 learner who budgets an hour and needs three is worse served than one who is told three up front.
 
-## The shape of a batch
+## The four exercises
 
 **Four per lesson**, in this order:
 
@@ -95,8 +95,8 @@ Layout that works:
 <repo>/<course>/README.md                         the workflow
 ```
 
-**Gate future lessons so a plain test run stays green.** The batch ships all at once but is turned
-on one exercise at a time:
+**Gate every exercise so a plain test run stays green.** A lesson's exercises ship together but are
+turned on one at a time:
 
 - TypeScript / Vitest: `describe.skip` plus a three-line header telling them to remove it.
 - Go: **one build tag per exercise**, `//go:build lessonNN_E || lessonNN`, and nothing to delete —
@@ -109,8 +109,9 @@ on one exercise at a time:
   Two compile checks, both needed: every tag alone (nothing undefined — so each test file must define
   every helper it uses) and the umbrella (nothing defined twice).
 
-Ship the *whole batch* gated, not just the later lessons — three lessons arrive at once and the
-learner enables them individually, in whichever language they pick that day.
+Ship every exercise gated, the first one included — four arrive at once (more, when the learner
+asked for several lessons in one run) and the learner enables them individually, in whichever
+language they pick that day.
 
 **Respect the host repo.** Read its conventions (test file suffix, import style, formatter, linter,
 existing config) and match them. Keep changes small, additive, and flagged to the user. If a linter
@@ -139,8 +140,9 @@ A broken spec costs the learner an hour and their trust in the whole suite.
    hint, worked solution or test comment that says "X would pass/fail Y" or "X looks equivalent and
    is not": swap that one line into the reference solution and run the real suite (STANDING-RULES
    40). Two such sentences in one lesson were false, and one test could not fail at all.
-8. **`npm run check:exercises`**: every test the page names exists, and every `-run` pattern the
-   page prints matches at least one test.
+8. **Check every test the page names, and every single-test command it prints**, against the real
+   test files: each name exists, each command matches at least one test. Do it with a course-local
+   check ([PLATFORM.md](PLATFORM.md#course-local-checks)), never by eye.
 9. **Run every command the steps print** and compare the output with what the step promises
    ("`-v` prints the board after each move").
 
@@ -188,7 +190,7 @@ stops compiling when the learner enables a different lesson.
   page — plain GETs to LeetCode return 403 for everything, so a status check proves nothing:
   `POST https://leetcode.com/graphql/` with
   `query{question(titleSlug:"…"){questionFrontendId title difficulty isPaidOnly}}`.
-- No paid problems. No problem already linked elsewhere in the same batch.
+- No paid problems. No problem already linked elsewhere in the course.
 - Only problems solvable with what has been taught by that lesson.
 - The learner follows these links and solves problems there, leaving no trace in any repo. They are
   real teaching surface — choose them deliberately.

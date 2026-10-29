@@ -130,7 +130,7 @@ the RULE it produced in bold. Cross-link the learning record.}
 {Anything a future session must not accidentally change.}
 
 ## Delivered / promised / open
-{What shipped in each batch. Every promise made in a "What's next" paragraph, and whether
+{What shipped, lesson by lesson. Every promise made in a "What's next" paragraph, and whether
 it has been paid.}
 ```
 

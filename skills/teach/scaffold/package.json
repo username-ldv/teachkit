@@ -12,7 +12,6 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "check:pages": "node tools/check-pages.mjs",
     "check:quizzes": "node tools/check-quizzes.mjs",
-    "check:exercises": "node tools/check-exercise-refs.mjs",
     "fix:tex": "node tools/fix-tex.mjs"
   },
   "devDependencies": {

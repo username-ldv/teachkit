@@ -38,14 +38,22 @@ off them.
    the subject and another is the learner's background, use the single track plus
    `<Callout kind="note">` asides instead — that is what the Svelte course chose, deliberately.)
 2. **Practice environment.** The big one; see the table below.
-3. **Format deltas.** Lesson length, batch size, exercises per lesson. Default 25–35 min, 3, 4.
+3. **Format deltas.** Lesson length, exercises per lesson, and whether lessons arrive one at a
+   time or several per run. Default 35–50 min (a target, not a cap), 4, one at a time.
 4. **This topic's apparatus.** *You* propose; they choose. See §3.
+5. **Independent review.** Should each lesson get a second read by a fresh agent before it ships?
+   Say what it is for and what it costs: in two courses it found 28 and 34 problems in a
+   three-lesson batch before the learner saw any of them, and it adds a long read's worth of tokens
+   to every lesson. Skip the
+   question when `references/LOCAL.md` already answers it. Record the answer in `NOTES.md` either
+   way, so it is never asked again. The procedure is in
+   [VERIFICATION.md](VERIFICATION.md#independent-review-optional).
 
 ---
 
 ## 2. Practice environments
 
-Pick from these; they are all in production somewhere in this learner's courses.
+Pick from these; each is in use in at least one of the courses this skill was built on.
 
 | Environment | Fits | How it works |
 | --- | --- | --- |
@@ -53,7 +61,7 @@ Pick from these; they are all in production somewhere in this learner's courses.
 | **A runnable practice app per lesson** | backend, APIs, frameworks | `practice/lesson-NN/` that builds and runs. Verify it end to end yourself before shipping. |
 | **Grounded in an existing repo of theirs** | anything they already work on | Cite real files and line numbers; exercises produce changes they can actually ship. Re-read the file before citing a line — line numbers drift. |
 | **In-page tasks** | maths, visual/geometric topics, quick concepts | An interactive figure they have to drive to the right state, or a prediction they commit to before revealing. Zero setup. |
-| **External problem sets** | interview prep, competitive practice | Two links per exercise. Verify each one exists, is free, is solvable with what has been taught, and is not already linked in the same batch. |
+| **External problem sets** | interview prep, competitive practice | Two links per exercise. Verify each one exists, is free, is solvable with what has been taught, and is not already linked elsewhere in the course. |
 | **A practice log** | non-code topics entirely | Steps with an explicit CHECKPOINT — how the learner knows it worked — and a record they keep. |
 
 Two or more can coexist: the DSA course ships stub+tests in *two* repos and links external problems
@@ -100,7 +108,8 @@ comparative claims get a citation or get softened.
 
 **Maths.** KaTeX everywhere; `<Derivation>` is the workhorse. Plots with a draggable parameter.
 In-page tasks over repo tasks. Ground every abstraction in something that renders in a browser —
-this learner explicitly wants maths made visible and runnable.
+the learner in the maths courses this was built on asked for exactly that: maths made visible and
+runnable.
 
 **Backend / API.** A runnable server per lesson, verified end to end (build it, curl it) before
 shipping. `Pipeline` and `Timeline` for request flow. Concepts-only lessons before implementation
@@ -129,7 +138,7 @@ Then, in order:
 
 1. **`src/lib/course.ts`** — fill in the `course` object: `id` (localStorage prefix — pick once,
    never change), `title`, `kicker`, `short`, `tagline`, `tracks`, `headerLinks`. Leave `lessons`
-   empty until the first batch exists.
+   empty until the first lesson exists.
 2. **`src/app.css`** — set `--accent` to something distinct for this course. Every other colour is
    derived; the diagram tones and the shadcn tokens all follow. One accent per course, so the
    learner can tell two open tabs apart.
@@ -142,10 +151,11 @@ Then, in order:
    `RecursionTree`, `GrowthChart`) are DSA-specific — read them for the interaction patterns, then
    delete the ones you will not use. Do not delete the core primitives; they are cheap and the third
    lesson will want them.
-7. **`tools/check-exercise-refs.mjs`**: set `TEST_ROOTS` to where each lesson's Go tests live, as soon
-   as the practice repo exists. It only acts on pages that name tests, so a course without Go tests can
-   leave it alone.
-8. **`git init`** and commit the scaffold before the first lesson, so the first batch has a diff.
+7. **Course-local checks.** Anything this course needs checked that the scaffold does not cover —
+   test names a page cites, solution code that must match the files that passed — becomes a script
+   in its `tools/`, listed in its `AGENTS.md`. See
+   [PLATFORM.md](PLATFORM.md#course-local-checks).
+8. **`git init`** and commit the scaffold before the first lesson, so the first lesson has a diff.
 
 Verify the empty course before writing a word of content: `npm run build` and `npm run check` must
 both be clean.
@@ -182,7 +192,7 @@ pages are built*.
 | `npm run check` | TypeScript + Svelte diagnostics for `src/lib` |
 | `npm run check:pages` | crawls every route and asserts nothing is broken |
 | `npm run check:quizzes` | checks quiz explanations survive the option shuffle |
-| `npm run check:exercises` | every test a page names exists; every `-run` pattern matches one |
+| <course-local checks> | one row each: the script, and what it catches |
 | `npm run build` | compiles and prerenders every page — the real gate before shipping |
 | `npm run fix:tex` | repairs under-escaped backslashes in `<Derivation>` / `<Math>` props |
 

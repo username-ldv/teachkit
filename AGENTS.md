@@ -7,7 +7,11 @@ prose, and the one thing that can actually be verified is the scaffold.
 skills/teach/          SKILL.md · references/ · scaffold/ · agents/openai.yaml
 skills/teach-adapt/    SKILL.md · agents/openai.yaml
 skills/teach-remake/   SKILL.md · agents/openai.yaml
+docs/                  INSTALL.md · HOW-IT-WORKS.md — the technical detail the README links to
 ```
+
+`README.md` is written for people deciding whether to try the skill, not for agents. Keep it
+readable by a non-programmer; installer flags, platform internals and layout go in `docs/`.
 
 `teach` owns the method; the other two are workflows over an existing course and link into
 `teach/references/` rather than restating it. When a rule changes, it changes in `teach/references/`
@@ -49,4 +53,6 @@ reference. A wrong prop name prerenders as a 500, which is the only reason it ge
 
 The scaffold is generalised from a live course. When that course improves one of
 `src/lib/components/`, `src/lib/diagrams/`, `src/styles/` or `tools/`, the change belongs here too —
-otherwise the two silently diverge.
+otherwise the two silently diverge. The exception is anything that concerns one course only: a
+check for one language's tests, one practice repo's layout, one lab's model. That stays
+course-local, and the references say how to write one (`PLATFORM.md`, "Course-local checks").

@@ -140,7 +140,8 @@ blockquote p { margin: 0.5rem 0; }
   font-size: 0.95rem;
 }
 .lesson-toc strong { display: block; margin-bottom: 0.5rem; }
-.lesson-toc ol { margin: 0; }
+/* Entries carry their own numbers, matching the <h2>s (LessonRail does the same). */
+.lesson-toc ol { margin: 0; padding-left: 0; list-style: none; }
 .lesson-toc li { margin-bottom: 0.2rem; }
 
 /* ---------- callouts ---------- */

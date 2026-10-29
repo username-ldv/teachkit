@@ -29,7 +29,7 @@ export const course = {
 
   /** Index-page standfirst: what the course is and how deep it goes. */
   tagline:
-    'Deep, unhurried lessons that assume nothing beyond the stated baseline. Every lesson: a ~30-minute read, checkpoint quizzes with instant feedback, and exercises at a real keyboard.',
+    'Deep, unhurried lessons that assume nothing beyond the stated baseline. Every lesson: a 35–50 minute read, checkpoint quizzes with instant feedback, and exercises at a real keyboard.',
 
   /**
    * The code tracks this course teaches side by side.
@@ -71,7 +71,7 @@ export const lessons: Lesson[] = [
   //   n: 1,
   //   title: 'First Lesson',
   //   blurb: 'What it covers · and what else · and the third thing.',
-  //   minutes: '~30 min',
+  //   minutes: '~45 min',
   //   exercises: '4 exercises incl. the thing they will actually build',
   //   exerciseTime: '~90 min',
   //   builds: 'Nothing — this is the start'

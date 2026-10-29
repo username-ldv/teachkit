@@ -48,7 +48,7 @@ strict sequencing, arithmetic shown, spaced retrieval, figures where movement is
 course's own `NOTES.md` overrides these where it is explicit.
 
 **Custom**: the user may state something else — "project-first, less theory", "move all practice
-into my repo", "these should be 15 minutes, not 35", "add a track for a second language". Take it
+into my repo", "these should be 15 minutes, not 45", "add a track for a second language". Take it
 literally, write it into the plan, and apply it consistently across the whole range rather than
 softening it lesson by lesson.
 

@@ -27,7 +27,8 @@ Look at the directory before writing anything.
 | The user is reporting confusion, a dispute, or a bug in a delivered lesson | **Repair** | [Mode C](#mode-c--repair) |
 
 Repair beats everything. If the user's message is "I don't understand X" or "isn't X wrong?",
-that is Mode C even mid-batch — and it is the highest-value work in this skill.
+that is Mode C even while the next lesson is being written — and it is the highest-value work in
+this skill.
 
 Mode C is for **one section, one claim, one task**. If what is wrong is the lesson's depth, scope,
 order, or the practice it promises — anything where the fix is "rewrite it" rather than "correct
@@ -50,17 +51,19 @@ so rather than quietly starting a rewrite inside a repair.
 
 ## The defaults
 
-These are the settled preferences, learned across five courses. Apply them unless `NOTES.md`
-says otherwise for this workspace. They are not the generic-good-teaching defaults — they are
-this learner's, and they are deliberately maximalist.
+These are settled preferences, learned across more than a dozen courses. Apply them unless
+`NOTES.md` says otherwise for this workspace, or `references/LOCAL.md` for this machine (the
+workspace wins where the two differ). They are not the generic-good-teaching defaults —
+they are deliberately maximalist, and the interview exists to move off them where a topic or a
+learner needs something else.
 
 | | Default |
 | --- | --- |
-| **Lesson length** | 25–35 minute read. Long is correct. When in doubt whether to explain something: explain. |
-| **Batch size** | 3 lessons, generated together, strictly sequential. |
+| **Lesson length** | 35–50 minute read — **a target, not a cap**: a topic takes the time it needs, or becomes two lessons. Long is correct. When in doubt whether to explain something: explain. |
+| **Pace** | **One lesson at a time**: written, verified and reported before the next is started, so each lesson can be shaped by how the last one landed. Write several in one run only when the user asks for it, and record a standing request in `NOTES.md`. |
 | **Sequencing** | Never use, quiz, or assume anything not taught earlier *in this course*. The baseline is written in `MISSION.md`; nothing else may be assumed. |
 | **Exercises** | 4 per lesson, each **substantial** — done at a real keyboard, with an invariant: build the thing · a classic problem at learning difficulty · a second angle · and a **practical real-world build** (green label). Plus 2 optional external problems per exercise. |
-| **Checkpoints** | 3–4 `<Quiz>` / `<NumericQuestion>` blocks through the lesson. Options equal length, retry until correct, explanation only on success. **A checkpoint is not an exercise** and its time never counts toward the exercise estimate. |
+| **Checkpoints** | 6–8 `<Quiz>` / `<NumericQuestion>` blocks woven through the lesson, one after each dense stretch. Options equal length, retry until correct, explanation only on success. **A checkpoint is not an exercise** and its time never counts toward the exercise estimate. |
 | **Time** | Reading time and exercise time are stated **separately** and conservatively. Both live in the manifest, never in page props. |
 | **Spaced retrieval** | Lesson 2 onward opens with `<Recall>` — 3 questions from *earlier* lessons only. |
 | **Ratio** | Theory-heavy. Exercises serve the concepts, not the reverse. |
@@ -70,6 +73,7 @@ this learner's, and they are deliberately maximalist.
 | **Theme** | Dark, always. No light mode, no print stylesheet — the learner reads on screen. |
 | **Screen** | A PC. Pages are checked at full desktop width; no phone-width pass, and no effort spent on small-screen layouts. |
 | **Every lesson ends with** | Primary source (fetched and verified) · further reading · ask-your-teacher box · prev/next. |
+| **Independent review** | **Optional, asked once.** Before a lesson ships, a fresh agent with none of the authoring context reads it as the learner would. It finds what the author's own checks cannot, and it costs more tokens. Ask in the interview (or before the first lesson it would apply to, if nothing records a choice), write the answer in `NOTES.md`, and do not ask again. See [VERIFICATION.md](references/VERIFICATION.md#independent-review-optional). |
 
 ## Mode A — new course
 
@@ -82,7 +86,8 @@ this learner's, and they are deliberately maximalist.
    `npm run dev`. Details in [COURSE-SETUP.md](references/COURSE-SETUP.md).
 4. **Write the workspace instruction file** (`AGENTS.md`) from the template in COURSE-SETUP.md,
    and `NOTES.md` with everything the interview established.
-5. **Write lessons 1–3.** Then verify ([VERIFICATION.md](references/VERIFICATION.md)) and report.
+5. **Write lesson 1** — only lesson 1, unless the user asked for more. Then verify
+   ([VERIFICATION.md](references/VERIFICATION.md)) and report.
 
 ## Mode B — continue a course
 
@@ -93,7 +98,8 @@ this learner's, and they are deliberately maximalist.
    ("binary search is earned in the sorted-data lesson"). An unpaid promise outranks a new topic.
 3. **Ask, do not infer, what they have practised.** Repo state is not a progress report — a
    remaining `TODO` or a skipped test says nothing. This has been wrong before.
-4. Write the batch: [LESSON-ANATOMY.md](references/LESSON-ANATOMY.md) for structure,
+4. Write the next lesson — one, unless the user asked for more:
+   [LESSON-ANATOMY.md](references/LESSON-ANATOMY.md) for structure,
    [PLATFORM.md](references/PLATFORM.md) for how to build the page,
    [INTERACTIVITY.md](references/INTERACTIVITY.md) for figures,
    [EXERCISES.md](references/EXERCISES.md) for practice.
@@ -107,10 +113,10 @@ this learner's, and they are deliberately maximalist.
 The learner says something is unclear, or disputes a claim. This is the most valuable signal the
 course produces. Handle it in this order:
 
-1. **If they are disputing a claim, work out whether they are right before defending it.** In this
-   course's history they have been right more often than not — including on a Go retention claim, a
-   ring-buffer failure mode, and a "there are exactly three ways" overclaim. If they propose a
-   design, *implement it and differential-test it* before answering.
+1. **If they are disputing a claim, work out whether they are right before defending it.** In the
+   courses this skill was built on, the learner was right more often than not — including on a Go
+   retention claim, a ring-buffer failure mode, and a "there are exactly three ways" overclaim. If
+   they propose a design, *implement it and differential-test it* before answering.
 2. **Watch for the tell**: they say "this sounds like X" and X is **true**. That is never
    confusion — it means the page asserted a conclusion and skipped the mechanism.
 3. **If they call a task unintelligible, read their code first.** The question names the symptom;
@@ -128,7 +134,7 @@ course produces. Handle it in this order:
 ## Non-negotiables
 
 The long version, with the incident behind each one, is in
-[STANDING-RULES.md](references/STANDING-RULES.md). Read it before writing a batch. The six that
+[STANDING-RULES.md](references/STANDING-RULES.md). Read it before writing a lesson. The six that
 have cost the most:
 
 - **Verify every primary source by fetching it.** Recognising a URL pattern is not verification.
@@ -155,7 +161,7 @@ have cost the most:
 | [EXERCISES.md](references/EXERCISES.md) | Designing practice and shipping it into the learner's repos |
 | [PLATFORM.md](references/PLATFORM.md) | The SvelteKit app: commands, layout, code blocks, escaping traps |
 | [VERIFICATION.md](references/VERIFICATION.md) | Before shipping anything |
-| [STANDING-RULES.md](references/STANDING-RULES.md) | Before writing a batch; when a lesson fails |
+| [STANDING-RULES.md](references/STANDING-RULES.md) | Before writing a lesson; when one fails |
 | [WORKSPACE-FILES.md](references/WORKSPACE-FILES.md) | Writing MISSION / RESOURCES / GLOSSARY / NOTES / learning records |
 | `references/LOCAL.md` | Machine-specific facts, if present. Gitignored — never publish anything from it |
 

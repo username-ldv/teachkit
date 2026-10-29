@@ -15,8 +15,8 @@ Deep learning needs three things, and they come from different places:
 
 Before `RESOURCES.md` is well populated, finding good sources *is* the work. Some topics are more
 knowledge-shaped (theory), some more skill-shaped (anything physical). Most programming topics need
-both, and this learner's courses are deliberately theory-heavy: the mental model first, the practice
-in service of it.
+both, and these courses are deliberately theory-heavy by default: the mental model first, the
+practice in service of it.
 
 For **wisdom**, the honest posture is to answer as far as you can and then name a community — a
 forum, a subreddit, a local group — where the answer gets tested against reality. Find high-signal
@@ -90,7 +90,7 @@ lesson 4 having never been introduced — the memory model got taught by using i
 
 ## Quiz design
 
-- **3–4 checkpoints per lesson**, placed after the section they test, not all at the end.
+- **6–8 checkpoints per lesson**, placed after the section they test, not all at the end.
 - **Options equal length.** Equal word count, and equal character count if it can be managed. A
   longer option is a tell, and a tell turns retrieval into pattern-matching.
 - **Position is the component's job, not yours — but the explanation is yours.** You draft a

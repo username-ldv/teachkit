@@ -22,14 +22,9 @@ Two things to remember while filling it in, both of which will bite:
 
 <svelte:head><title>Lesson N · Title — Course Name</title></svelte:head>
 
-<LessonHeader
-  n={N}
-  title="Title"
-  minutes="~30 min read"
-  exercises="4 exercises"
-  exerciseHours="~2 h"
-  builds="Lessons 1–N-1"
-/>
+<!-- Only the number. Title, reading time, exercises, exercise time and `builds`
+     all come from this lesson's entry in src/lib/course.ts — add it there first. -->
+<LessonHeader n={N} />
 
 <!-- Lesson 2 onward. Three questions from EARLIER lessons only. -->
 <Recall>

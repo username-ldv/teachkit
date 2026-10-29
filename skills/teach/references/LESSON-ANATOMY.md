@@ -26,7 +26,8 @@ so an entry may carry markup or a second link. The same entries feed `LessonRail
 the right margin (top, a floating copy of this list, exercises, end): its exercises button appears
 only when an entry links `#exercises`.
 
-**5. The body** — numbered `<h2 id="…">` sections. Ten to fourteen is normal for a 30-minute lesson.
+**5. The body** — numbered `<h2 id="…">` sections. Twelve to sixteen is normal for a 45-minute
+lesson.
 The arc that works:
 
 - **The wall.** Open with the problem the learner already has. "Look at what four lessons of price
@@ -34,7 +35,8 @@ The arc that works:
 - **The idea, in one sentence,** before any mechanism.
 - **The mechanism, slowly.** One concept per section. Figures where the shape is the point.
 - **The arithmetic, shown.** `<Derivation>`, every step, with the reason beside it.
-- **A checkpoint `<Quiz>`** after each dense stretch — 3 to 4 in the lesson.
+- **A checkpoint** (`<Quiz>` or `<NumericQuestion>`) after each dense stretch — 6 to 8 in the
+  lesson.
 - **The real thing.** How the language or framework actually implements it, and what differs.
 - **When *not* to use it.** Honest limits. A lesson that only sells is not teaching.
 - **The payoff.** Something the learner could not do before and now can.
@@ -67,7 +69,7 @@ is counting on.
 
 A **checkpoint** is short — a `<Quiz>` of multiple-choice `<Question>`s, or a `<NumericQuestion>`
 where the answer is a number and the page checks it. It sits inside the section it tests, takes
-under a minute, and exists to make retrieval effortful. There are 3–4 per lesson and they are part
+under a minute, and exists to make retrieval effortful. There are 6–8 per lesson and they are part
 of the *reading*.
 
 An **exercise** is substantial. It is done at a real keyboard, it states an invariant, it takes
@@ -85,8 +87,14 @@ From this:
 
 ## Writing the prose
 
-**Long is correct.** 25–35 minutes. When in doubt whether something needs explaining: explain it.
-The failure mode of this course has never been too much detail.
+**Long is correct.** 35–50 minutes, and that is a target, not a cap: a topic takes the time it
+needs, or becomes two lessons. Do not cut explanation to fit the number. When in doubt whether
+something needs explaining: explain it. The failure mode of this course has never been too much
+detail.
+
+When a lesson runs well past the target, offer the split rather than deciding it. One learner
+asked for heavy topics to be split, then kept a 65-minute lesson whole when offered the choice
+("it is ok to keep as one"); a 55-minute one before it "was ok" too.
 
 **One step per sentence in an argument.** The single worst-received paragraph in the reference
 course compressed three steps into one sentence and used "≈" for the hard part. Rewritten as three

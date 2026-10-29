@@ -3,7 +3,7 @@
 Each of these was paid for. The incident is included because the rule without the incident degrades
 into a slogan, and a slogan does not survive a session where you are in a hurry.
 
-Read this before writing a batch, and again when a lesson fails.
+Read this before writing a lesson, and again when a lesson fails.
 
 ---
 
@@ -304,9 +304,9 @@ checking, not by care.**
   said `Subsets([]int{1, 2})` is `[[] [1] [2] [1 2]]`; the tests and the page wanted
   `[[] [2] [1] [1 2]]`. A learner obeying the file they were editing would have failed a test for it.
 - **A test the page names exists, and a `-run` pattern it prints matches something.**
-  `npm run check:exercises` (`scaffold/tools/check-exercise-refs.mjs`) checks both against the
-  lesson's test files. Its first runs found five test names that had never existed, across two
-  lessons. They also found `-run 'TestBinarySearch$'`, which matched no test (the tests were
+  A Go course wrote a course-local check for both against the lesson's test files (see
+  PLATFORM.md, "Course-local checks"). Its first runs found five test names that had never existed,
+  across two lessons. They also found `-run 'TestBinarySearch$'`, which matched no test (the tests were
   `TestBinarySearchExhaustive` and two siblings), so `go test` printed `[no tests to run]` and exited
   0. That example sat in the very paragraph warning about that trap.
 - **Every step that promises output is run and read.** "Re-run with `-v`: it prints the board after

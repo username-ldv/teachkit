@@ -20,7 +20,7 @@
       that remembers your choice across all pages.
     {/if}
     Diagrams are live where movement is the point: drag, step and toggle them. When you finish a
-    batch of lessons, ask your teacher to generate the next one — and ask questions any time
+    lesson, ask your teacher to write the next one — and ask questions any time
     something is less than fully clear.
   </p>
 </Callout>
@@ -45,7 +45,7 @@
 {/each}
 
 {#if roadmap.length}
-  <h2>Roadmap — ask your teacher to generate the next batch</h2>
+  <h2>Roadmap — ask your teacher for the next lesson</h2>
 
   <ul class="roadmap">
     {#each roadmap as item (item.n)}
